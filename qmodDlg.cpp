@@ -138,7 +138,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 			WriteProcessMemory(handle, address, &houseValue, 2, 0);
 		}
 		if (houseValue == 0) sprintf(bufferText, "House 1 - Auto");
-		else if (houseValue>=2000) sprintf(bufferText, "House 1 - Full");
+		else if (houseValue >= 2000) sprintf(bufferText, "House 1 - Full");
 		else sprintf(bufferText, "House 1 - %d/2000", houseValue);
 		GetDlgItem(IDC_HOUSE)->SetWindowTextA(bufferText);
 
@@ -156,7 +156,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 			houseValue += 1;
 			WriteProcessMemory(handle, address, &houseValue, 2, 0);
 		}
-		if (houseValue==0) sprintf(bufferText, "House 2 - Auto");
+		if (houseValue == 0) sprintf(bufferText, "House 2 - Auto");
 		else if (houseValue >= 2000) sprintf(bufferText, "House 2 - Full");
 		else sprintf(bufferText, "House 2 - %d/2000", houseValue);
 		GetDlgItem(IDC_HOUSE2)->SetWindowTextA(bufferText);
@@ -203,6 +203,74 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		GetDlgItem(IDC_WEAR)->SetWindowTextA(bufferText);
 
 
+
+
+
+		address = (int*)0x7EE3E0;
+		houseValue = 0;
+		ReadProcessMemory(handle, address, &houseValue, 2, 0);
+		if (houseValue > 1 && houseValue < 1980)
+		{
+			houseValue += 10;
+			WriteProcessMemory(handle, address, &houseValue, 2, 0);
+		}
+		else if (houseValue > 1 && houseValue < 1998)
+		{
+			houseValue += 1;
+			WriteProcessMemory(handle, address, &houseValue, 2, 0);
+		}
+		if (houseValue == 0) sprintf(bufferText, "School - Auto");
+		else if (houseValue >= 2000) sprintf(bufferText, "School - Full");
+		else sprintf(bufferText, "School - %d/2000", houseValue);
+		GetDlgItem(IDC_SCHOOL)->SetWindowTextA(bufferText);
+
+
+
+
+
+		address = (int*)0x7EE3D8;
+		houseValue = 0;
+		ReadProcessMemory(handle, address, &houseValue, 2, 0);
+		if (houseValue > 1 && houseValue < 1980)
+		{
+			houseValue += 10;
+			WriteProcessMemory(handle, address, &houseValue, 2, 0);
+		}
+		else if (houseValue > 1 && houseValue < 1998)
+		{
+			houseValue += 1;
+			WriteProcessMemory(handle, address, &houseValue, 2, 0);
+		}
+		if (houseValue == 0) sprintf(bufferText, "LoveShark - Auto");
+		else if (houseValue >= 2000) sprintf(bufferText, "LoveShark - Full");
+		else sprintf(bufferText, "LoveShark - %d/2000", houseValue);
+		GetDlgItem(IDC_LOVESHARK)->SetWindowTextA(bufferText);
+
+
+
+
+
+		//Tribute
+		address = (int*)0x7EDC74;
+		houseValue = 0;
+		ReadProcessMemory(handle, address, &houseValue, 2, 0);
+		short int houseType = 0;
+		ReadProcessMemory(handle, (int*)0x7EDC78, &houseValue, 2, 0);
+		//		if (houseValue > 1 && houseValue < 1980)
+		//		{
+		//			houseValue += 10;
+		//			WriteProcessMemory(handle, address, &houseValue, 2, 0);
+		//		}
+		//		else if (houseValue > 1 && houseValue < 1998)
+		//		{
+		//			houseValue += 1;
+		//			WriteProcessMemory(handle, address, &houseValue, 2, 0);
+		//		}
+		if (houseValue == 0) sprintf(bufferText, "Tribute - Auto");
+		else if (houseValue >= 2000) sprintf(bufferText, "Tribute - Full");
+		else sprintf(bufferText, "Tribute - %d/2000|%d", houseValue, houseType);
+		sprintf(bufferText, "Tribute - %d/2000|%d", houseValue, houseType);
+		GetDlgItem(IDC_TRIBUTE)->SetWindowTextA(bufferText);
 
 
 
