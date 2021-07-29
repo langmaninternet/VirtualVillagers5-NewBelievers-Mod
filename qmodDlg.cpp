@@ -122,7 +122,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		// 
 		// Virtual Villagers - New Believers.exe+2D0D0 - 01 B3 587D0100        - add [ebx+00017D58],esi
 		unsigned char NoniCheat[1] = { 0x01};
-		GhiDuLieu1(L"Virtual Villagers - New Believers WndCls", L"Virtual Villagers - New Believers", NULL, 0x5A9E3, NoniCheat, 1);
+		GhiDuLieu1(L"Virtual Villagers - New Believers WndCls", L"Virtual Villagers - New Believers", NULL, 0x2D0D0, NoniCheat, 1);
 
 
 
