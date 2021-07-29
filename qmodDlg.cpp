@@ -137,13 +137,34 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (handle == 0) return;
 
 		char bufferText[100] = { 0 };
+		int* address = NULL;
 
+
+
+		//mausoleum
+		address = (int*)0x7EE4BC;
 		float mausoleum = 0.0;
-		ReadProcessMemory(handle, (int*)0x7EE4BC, &mausoleum, 4, 0);
+		ReadProcessMemory(handle, address, &mausoleum, 4, 0);
+		if (mausoleum > 200.0)
+		{
+			mausoleum -= 100.0;
+			mausoleum = floor(mausoleum);
+		}
+		else if (mausoleum > 20.0)
+		{
+			mausoleum -= 10.0;
+			mausoleum = floor(mausoleum);
+		}
+		else if (mausoleum > 2.0)
+		{
+			mausoleum--;
+			mausoleum = floor(mausoleum);
+		}
+		WriteProcessMemory(handle, address, &mausoleum, 4, 0);
 		sprintf(bufferText, "Mausoleum - %0.1f", mausoleum);
 		GetDlgItem(IDC_MAUSOLEUM)->SetWindowTextA(bufferText);
 
-		int* address = (int*)0x7EE3B8;
+		address = (int*)0x7EE3B8;
 		short int houseValue = 0;
 		ReadProcessMemory(handle, address, &houseValue, 2, 0);
 		if (houseValue > 1 && houseValue < 1980)
@@ -274,29 +295,24 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		houseValue = 0;
 		//float houseTributeValue = 0.0;
 		ReadProcessMemory(handle, address, &houseValue, 2, 0);
-		short int houseType = 0;
-		ReadProcessMemory(handle, (int*)0x7EDC78, &houseType, 2, 0);
-		if (houseType == 0)
+		if (houseValue > 1)
 		{
-			if (houseValue > 1 && houseValue < 15)
-			{
-				houseValue += 1;
-				WriteProcessMemory(handle, address, &houseValue, 2, 0);
-			}
+			houseValue += 1;
+			WriteProcessMemory(handle, address, &houseValue, 2, 0);
 		}
-		//		if (houseValue > 1 && houseValue < 1980)
-		//		{
-		//			houseValue += 10;
-		//			WriteProcessMemory(handle, address, &houseValue, 2, 0);
-		//		}
-		//		else if (houseValue > 1 && houseValue < 1998)
-		//		{
-		//			houseValue += 1;
-		//			WriteProcessMemory(handle, address, &houseValue, 2, 0);
-		//		}
+		//	if (houseValue > 1 && houseValue < 15)
+		//	{
+		//		houseValue += 1;
+		//		WriteProcessMemory(handle, address, &houseValue, 2, 0);
+		//	}
+		//	else if (houseValue > 1 && houseValue < 190)
+		//	{
+		//		houseValue += 10;
+		//		WriteProcessMemory(handle, address, &houseValue, 2, 0);
+		//	}
 		if (houseValue == 0) sprintf(bufferText, "Tribute - Auto");
 		else if (houseValue >= 2000) sprintf(bufferText, "Tribute - Full");
-		else sprintf(bufferText, "Tribute - %d/2000|%d", houseValue, houseType);
+		else sprintf(bufferText, "Tribute - %d/2000", houseValue);
 		GetDlgItem(IDC_TRIBUTE)->SetWindowTextA(bufferText);
 
 
@@ -754,7 +770,7 @@ void CQmodDlg::OnMausoleum()
 {
 	// TODO: Add your control notification handler code here
 	int* address = (int*)0x7EE4BC;
-	float temp = 1.2f;
+	float temp = 1.0f;
 	GhiDuLieu(address, &temp, 4);
 }
 
