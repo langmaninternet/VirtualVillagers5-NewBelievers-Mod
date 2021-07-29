@@ -114,8 +114,9 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (!hwnd) return;
 		DWORD pid;
 		GetWindowThreadProcessId(hwnd, &pid);
+		if (pid == 0) return;
 		HANDLE handle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_OPERATION | PROCESS_VM_READ | PROCESS_VM_WRITE, FALSE, pid);
-
+		if (handle == 0) return;
 
 		char bufferText[100] = { 0 };
 
@@ -269,7 +270,6 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (houseValue == 0) sprintf(bufferText, "Tribute - Auto");
 		else if (houseValue >= 2000) sprintf(bufferText, "Tribute - Full");
 		else sprintf(bufferText, "Tribute - %d/2000|%d", houseValue, houseType);
-		sprintf(bufferText, "Tribute - %d/2000|%d", houseValue, houseType);
 		GetDlgItem(IDC_TRIBUTE)->SetWindowTextA(bufferText);
 
 
