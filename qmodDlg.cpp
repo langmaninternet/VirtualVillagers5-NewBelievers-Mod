@@ -121,7 +121,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		//Virtual Villagers - New Believers.exe+2D0D0 - 29 B3 587D0100        - sub [ebx+00017D58],esi
 		// 
 		// Virtual Villagers - New Believers.exe+2D0D0 - 01 B3 587D0100        - add [ebx+00017D58],esi
-		unsigned char NoniCheat[1] = { 0x01};
+		unsigned char NoniCheat[1] = { 0x01 };
 		GhiDuLieu1(L"Virtual Villagers - New Believers WndCls", L"Virtual Villagers - New Believers", NULL, 0x2D0D0, NoniCheat, 1);
 
 
@@ -272,9 +272,18 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		//Tribute
 		address = (int*)0x7EDC74;
 		houseValue = 0;
+		//float houseTributeValue = 0.0;
 		ReadProcessMemory(handle, address, &houseValue, 2, 0);
 		short int houseType = 0;
-		ReadProcessMemory(handle, (int*)0x7EDC78, &houseValue, 2, 0);
+		ReadProcessMemory(handle, (int*)0x7EDC78, &houseType, 2, 0);
+		if (houseType == 0)
+		{
+			if (houseValue > 1 && houseValue < 15)
+			{
+				houseValue += 1;
+				WriteProcessMemory(handle, address, &houseValue, 2, 0);
+			}
+		}
 		//		if (houseValue > 1 && houseValue < 1980)
 		//		{
 		//			houseValue += 10;
