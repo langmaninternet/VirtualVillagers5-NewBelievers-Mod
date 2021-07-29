@@ -100,6 +100,13 @@ BOOL CQmodDlg::OnInitDialog()
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
+void	GhiDuLieu1(
+	const wchar_t* className /*= L"Virtual Villagers - New Believers WndCls"*/,
+	const wchar_t* windowName /*= L"Virtual Villagers - New Believers"*/,
+	wchar_t* moduleName /*= L"Virtual Villagers - New Believers.exe" , NULL is excute file name*/,
+	DWORD baseoffset /*= 0x380DAD*/,
+	unsigned char* membuffer/*{0x90,0x90,0x90} = nop */,
+	int membufferLength /*= 3*/);
 
 void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 {
@@ -109,6 +116,17 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		OnSetfocusTech();
 		OnFastskill();
 		OnMana();
+
+		// Noni
+		//Virtual Villagers - New Believers.exe+2D0D0 - 29 B3 587D0100        - sub [ebx+00017D58],esi
+		// 
+		// Virtual Villagers - New Believers.exe+2D0D0 - 01 B3 587D0100        - add [ebx+00017D58],esi
+		unsigned char SixNopArray[6] = { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 };
+		GhiDuLieu1(L"Virtual Villagers - New Believers WndCls", L"Virtual Villagers - New Believers", NULL, 0x5A9E3, SixNopArray, 6);
+
+
+
+
 
 		HWND hwnd = ::FindWindow("Virtual Villagers - New Believers WndCls", "Virtual Villagers - New Believers");
 		if (!hwnd) return;
@@ -274,6 +292,8 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 
 
 
+
+
 		CloseHandle(handle);
 	}
 }
@@ -425,9 +445,16 @@ void CQmodDlg::OnSetfocusTech()
 
 	int* address = (int*)0x7A79E0;
 	ReadProcessMemory(handle, address, &m_tech, 4, 0);
-	if (m_tech < 999899 && m_tech>100)
+	if (m_tech < 999899 && m_tech > 100)
 	{
 		m_tech += 100;
+		int* address = (int*)0x7A79E0;
+		GhiDuLieu(address, &m_tech, 4);
+	}
+	else if (m_tech < 90)
+	{
+		if (m_tech < 1) m_tech = 1;
+		m_tech++;
 		int* address = (int*)0x7A79E0;
 		GhiDuLieu(address, &m_tech, 4);
 	}
