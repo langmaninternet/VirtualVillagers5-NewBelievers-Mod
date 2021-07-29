@@ -49,10 +49,10 @@
     <TargetName>$(ProjectName)$(Configuration)$(Platform)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>D:\Work\Build\$(Configuration)$(Platform)\</OutDir>
+    <OutDir>$(ProjectDir)</OutDir>
     <IntDir>D:\Work\Build\$(Configuration)$(Platform)\$(ProjectName)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>$(ProjectName)$(Configuration)$(Platform)</TargetName>
+    <TargetName>$(ProjectName)</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

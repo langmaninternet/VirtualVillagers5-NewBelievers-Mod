@@ -382,9 +382,9 @@ void CQmodDlg::OnSetfocusFood()
 	int* address = (int*)0x7A7730;
 	ReadProcessMemory(handle, address, &m_food, 4, 0);
 
-	if (m_food < 99999)
+	if (m_food < 99989)
 	{
-		m_food = 99999;
+		m_food += 10;
 		int* address = (int*)0x7A7730;
 		GhiDuLieu(address, &m_food, 4);
 	}
@@ -425,9 +425,9 @@ void CQmodDlg::OnSetfocusTech()
 
 	int* address = (int*)0x7A79E0;
 	ReadProcessMemory(handle, address, &m_tech, 4, 0);
-	if (m_tech < 999999)
+	if (m_tech < 999899 && m_tech>100)
 	{
-		m_tech = 999999;
+		m_tech += 100;
 		int* address = (int*)0x7A79E0;
 		GhiDuLieu(address, &m_tech, 4);
 	}
