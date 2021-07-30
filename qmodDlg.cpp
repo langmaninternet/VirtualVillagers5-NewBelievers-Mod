@@ -420,6 +420,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 
 		//rare mushroom  5;
 		address = (int*)0x7EE600;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
 		if (trophies < 4)
 		{
 			trophies = 4;
@@ -427,6 +428,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		}
 		//rare mushroom  25;
 		address = (int*)0x7EE60C;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
 		if (trophies < 24)
 		{
 			trophies = 24;
@@ -434,11 +436,214 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		}
 		//rare mushroom  100;
 		address = (int*)0x7EE618;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
 		if (trophies < 99)
 		{
 			trophies = 99;
 			GhiDuLieu(address, &trophies, 4);
 		}
+
+
+		//Relics
+		address = (int*)0x7EE624;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 24)
+		{
+			trophies = 24;
+			GhiDuLieu(address, &trophies, 4);
+		}
+
+		//		//Science items
+		//		address = (int*)0x7EE630;
+		//		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		//		if (trophies < 25)
+		//		{
+		//			trophies = 25;
+		//			GhiDuLieu(address, &trophies, 4);
+		//		}
+		//		
+		//		//Master collector
+		//		address = (int*)0x7EE63C;
+		//		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		//		if (trophies < 2)
+		//		{
+		//			trophies = 2;
+		//			GhiDuLieu(address, &trophies, 4);
+		//		}
+
+
+		//Heathens 3
+		address = (int*)0x7EE660;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 2)
+		{
+			trophies = 2;
+			GhiDuLieu(address, &trophies, 4);
+		}
+
+		//Heathens 10
+		address = (int*)0x7EE66C;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 9)
+		{
+			trophies = 9;
+			GhiDuLieu(address, &trophies, 4);
+		}
+
+
+		//		//buom bay
+		//		temp = 15;
+		//		address = (int*)0x7EE684;
+		//		GhiDuLieu(address, &temp, 4);
+
+
+		//baby girl
+		address = (int*)0x7EE6CC;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 9)
+		{
+			trophies = 9;
+			GhiDuLieu(address, &trophies, 4);
+		}
+
+		//baby boy
+		address = (int*)0x7EE6D8;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 9)
+		{
+			trophies = 9;
+			GhiDuLieu(address, &trophies, 4);
+		}
+
+
+
+
+		//		//master skill
+		//		temp = 10;
+		//		address = (int*)0x7EE750;
+		//		GhiDuLieu(address, &temp, 4);
+		//		
+		//		
+
+
+		//event 10;
+		address = (int*)0x7EE7B0;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 9)
+		{
+			trophies = 9;
+			GhiDuLieu(address, &trophies, 4);
+		}
+
+
+		//event 50;
+		address = (int*)0x7EE7BC;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 49)
+		{
+			trophies = 49;
+			GhiDuLieu(address, &trophies, 4);
+		}
+
+
+
+		//		//3house
+		//		temp = 1;
+		//		address = (int*)0x7EE7C4;
+		//		GhiDuLieu(address, &temp, 1);
+		//		
+		//		//school
+		//		temp = 1;
+		//		address = (int*)0x7EE7D0;
+		//		GhiDuLieu(address, &temp, 1);
+		//		
+		//		// wear
+		//		temp = 1;
+		//		address = (int*)0x7EE7DC;
+		//		GhiDuLieu(address, &temp, 1);
+		//		
+		//cured = 10;
+		address = (int*)0x7EE7EC;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 9)
+		{
+			trophies = 9;
+			GhiDuLieu(address, &trophies, 4);
+		}
+
+
+		//cured = 50;
+		address = (int*)0x7EE7F8;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 49)
+		{
+			trophies = 49;
+			GhiDuLieu(address, &trophies, 4);
+		}
+
+
+		//cured = 100;
+		address = (int*)0x7EE804;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 99)
+		{
+			trophies = 99;
+			GhiDuLieu(address, &trophies, 4);
+		}
+
+
+
+		//dot lua 50
+		address = (int*)0x7EE810;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 49)
+		{
+			trophies = 49;
+			GhiDuLieu(address, &trophies, 4);
+		}
+
+
+
+		//dot lua time
+		address = (int*)0x7EE81C;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 99)
+		{
+			trophies = 99;
+			GhiDuLieu(address, &trophies, 4);
+		}
+
+
+
+
+
+		//100 bo quan ao
+		address = (int*)0x7EE834;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 99)
+		{
+			trophies = 99;
+			GhiDuLieu(address, &trophies, 4);
+		}
+
+
+
+
+		//		temp = 10;
+		//		address = (int*)0x7EE84C;
+		//		GhiDuLieu(address, &temp, 4);
+		//		
+		//		
+		//		temp = 10;
+		//		address = (int*)0x7EE87C;
+		//		GhiDuLieu(address, &temp, 4);
+		//		
+		//		temp = 50;
+		//		address = (int*)0x7EE888;
+		//		GhiDuLieu(address, &temp, 4);
+
+
+
 
 
 		CloseHandle(handle);
