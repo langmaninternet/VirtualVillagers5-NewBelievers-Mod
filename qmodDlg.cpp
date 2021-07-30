@@ -389,6 +389,58 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 
 
 
+
+		//mushroom  007EE5DC 007EE5E8   007EE5F4
+		//mushroom 25;
+		address = (int*)0x7EE5DC;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 24)
+		{
+			trophies = 24;
+			GhiDuLieu(address, &trophies, 4);
+		}
+		//mushroom 100;
+		address = (int*)0x7EE5E8;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 99)
+		{
+			trophies = 99;
+			GhiDuLieu(address, &trophies, 4);
+		}
+		//mushroom 500;
+		address = (int*)0x7EE5F4;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 499)
+		{
+			trophies = 499;
+			GhiDuLieu(address, &trophies, 4);
+		}
+
+
+
+		//rare mushroom  5;
+		address = (int*)0x7EE600;
+		if (trophies < 4)
+		{
+			trophies = 4;
+			GhiDuLieu(address, &trophies, 4);
+		}
+		//rare mushroom  25;
+		address = (int*)0x7EE60C;
+		if (trophies < 24)
+		{
+			trophies = 24;
+			GhiDuLieu(address, &trophies, 4);
+		}
+		//rare mushroom  100;
+		address = (int*)0x7EE618;
+		if (trophies < 99)
+		{
+			trophies = 99;
+			GhiDuLieu(address, &trophies, 4);
+		}
+
+
 		CloseHandle(handle);
 	}
 }
