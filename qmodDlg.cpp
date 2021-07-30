@@ -1263,7 +1263,7 @@ void CQmodDlg::OnMana()
 	unsigned char infManaData[1] = { 0x01 };
 	GhiDuLieu1(L"Virtual Villagers - New Believers WndCls", L"Virtual Villagers - New Believers", NULL, 0x5A9E3, infManaData, 1);
 
-	unsigned char maxManaData[1] = { 0xFF };
-	//GhiDuLieu1(L"Virtual Villagers - New Believers WndCls", L"Virtual Villagers - New Believers", NULL, 0x5AAD0, maxManaData, 1);
+	unsigned char maxManaData[2] = { 0x90,0x90 };
+	GhiDuLieu1(L"Virtual Villagers - New Believers WndCls", L"Virtual Villagers - New Believers", NULL, 0x5AAD6, maxManaData, 2);
 
 }
