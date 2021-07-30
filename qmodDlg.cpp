@@ -46,10 +46,6 @@ BEGIN_MESSAGE_MAP(CQmodDlg, CDialog)
 	ON_BN_CLICKED(IDC_LOVESHARK, OnLoveshark)
 	ON_BN_CLICKED(IDC_SCHOOL, OnSchool)
 	ON_BN_CLICKED(IDC_WEAR, OnWear)
-	ON_BN_CLICKED(IDC_HOUSE, OnHouse)
-	ON_BN_CLICKED(IDC_HOUSE2, OnHouse2)
-	ON_BN_CLICKED(IDC_HOUSE3, OnHouse3)
-	ON_BN_CLICKED(IDC_TRIBUTE, OnTribute)
 	ON_BN_CLICKED(IDC_TROPHIES, OnTrophies)
 	ON_WM_CTLCOLOR()
 	ON_BN_CLICKED(IDC_MAUSOLEUM, OnMausoleum)
@@ -181,6 +177,11 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		else if (houseValue >= 2000) sprintf(bufferText, "House 1 - Full");
 		else sprintf(bufferText, "House 1 - %d/2000", houseValue);
 		GetDlgItem(IDC_HOUSE)->SetWindowTextA(bufferText);
+		//	temp = 1;
+		//	address = (int*)0x7EE7C4;
+		//	GhiDuLieu(address, &temp, 1);
+
+
 
 
 		address = (int*)0x7EE3C0;
@@ -200,6 +201,11 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		else if (houseValue >= 2000) sprintf(bufferText, "House 2 - Full");
 		else sprintf(bufferText, "House 2 - %d/2000", houseValue);
 		GetDlgItem(IDC_HOUSE2)->SetWindowTextA(bufferText);
+		//	temp = 1;
+		//	address = (int*)0x7EE7C4;
+		//	GhiDuLieu(address, &temp, 1);
+
+
 
 
 		address = (int*)0x7EE3C8;
@@ -219,7 +225,9 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		else if (houseValue >= 2000) sprintf(bufferText, "House 3 - Full");
 		else sprintf(bufferText, "House 3 - %d/2000", houseValue);
 		GetDlgItem(IDC_HOUSE3)->SetWindowTextA(bufferText);
-
+		//	temp = 1;
+		//	address = (int*)0x7EE7C4;
+		//	GhiDuLieu(address, &temp, 1);
 
 
 
@@ -846,53 +854,6 @@ void CQmodDlg::OnWear()
 	GhiDuLieu(address, &temp, 1);
 }
 
-void CQmodDlg::OnHouse()
-{
-	// TODO: Add your control notification handler code here
-
-	int* address = (int*)0x7EE3B8;
-	short int temp = 2000;
-
-	GhiDuLieu(address, &temp, 2);
-	temp = 1;
-	address = (int*)0x7EE7C4;
-	GhiDuLieu(address, &temp, 1);
-}
-
-void CQmodDlg::OnHouse2()
-{
-	// TODO: Add your control notification handler code here
-
-	int* address = (int*)0x7EE3C0;
-	short int temp = 2000;
-
-	GhiDuLieu(address, &temp, 2);
-	temp = 1;
-	address = (int*)0x7EE7C4;
-	GhiDuLieu(address, &temp, 1);
-}
-
-void CQmodDlg::OnHouse3()
-{
-
-	// TODO: Add your control notification handler code here
-	int* address = (int*)0x7EE3C8;
-	short int temp = 2000;
-
-	GhiDuLieu(address, &temp, 2);
-	temp = 1;
-	address = (int*)0x7EE7C4;
-	GhiDuLieu(address, &temp, 1);
-}
-
-
-void CQmodDlg::OnTribute()
-{
-	// TODO: Add your control notification handler code here
-	int* address = (int*)0x7EDC74;
-	short int temp = 2000;
-	GhiDuLieu(address, &temp, 2);
-}
 
 void CQmodDlg::OnTrophies()
 {

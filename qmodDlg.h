@@ -50,10 +50,6 @@ protected:
 	afx_msg void OnLoveshark();
 	afx_msg void OnSchool();
 	afx_msg void OnWear();
-	afx_msg void OnHouse();
-	afx_msg void OnHouse2();
-	afx_msg void OnHouse3();
-	afx_msg void OnTribute();
 	afx_msg void OnTrophies();
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg void OnMausoleum();
