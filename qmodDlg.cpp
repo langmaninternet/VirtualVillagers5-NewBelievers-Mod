@@ -926,6 +926,6 @@ void CQmodDlg::OnFastskill()
 void CQmodDlg::OnMana()
 {
 	//Virtual Villagers - New Believers.exe+5A9E3 - 29 86 647D0100        - sub [esi+00017D64],eax
-	unsigned char dataarr[6] = { 0x90,0x90,0x90,0x90,0x90,0x90 };
-	GhiDuLieu1(L"Virtual Villagers - New Believers WndCls", L"Virtual Villagers - New Believers", NULL, 0x5A9E3, dataarr, 6);
+	unsigned char dataarr[1] = { 0x01 };
+	GhiDuLieu1(L"Virtual Villagers - New Believers WndCls", L"Virtual Villagers - New Believers", NULL, 0x5A9E3, dataarr, 1);
 }
