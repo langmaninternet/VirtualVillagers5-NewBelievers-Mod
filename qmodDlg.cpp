@@ -1253,9 +1253,7 @@ void CQmodDlg::OnFastskill()
 
 
 	//"Virtual Villagers - New Believers.exe"+3576D - C7 04 8E  0000C842    - mov [esi+ecx*4],42C80000
-	//Virtual Villagers - New Believers.exe + 35777 - 90                    - nop
-
-	unsigned char dataarr[8] = { 0xC7, 0x04, 0x8E, 0x00, 0x00, 0xC8, 0x42, 0x90};
+	unsigned char dataarr[18] = { 0xC7,0x04,0x8E,0x00,0x00,0xC8,0x42, 0x90,0x90,0x90,0x90,0x90,0x90,0x90,0x90,0x90,0x90,0x90 };
 	GhiDuLieu1(L"Virtual Villagers - New Believers WndCls", L"Virtual Villagers - New Believers", NULL, 0x3576D, dataarr, 8);
 
 }
@@ -1266,6 +1264,6 @@ void CQmodDlg::OnMana()
 	GhiDuLieu1(L"Virtual Villagers - New Believers WndCls", L"Virtual Villagers - New Believers", NULL, 0x5A9E3, infManaData, 1);
 
 	unsigned char maxManaData[1] = { 0xFF };
-	GhiDuLieu1(L"Virtual Villagers - New Believers WndCls", L"Virtual Villagers - New Believers", NULL, 0x5AAD0, maxManaData, 1);
+	//GhiDuLieu1(L"Virtual Villagers - New Believers WndCls", L"Virtual Villagers - New Believers", NULL, 0x5AAD0, maxManaData, 1);
 
 }
