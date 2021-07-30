@@ -325,7 +325,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 999)
 		{
 			trophies = 999;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 		//food   10000
 		address = (int*)0x7EE588;
@@ -333,7 +333,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 9999)
 		{
 			trophies = 9999;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 		//food  100000
 		address = (int*)0x7EE594;
@@ -341,7 +341,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 99999)
 		{
 			trophies = 99999;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 		//food  1000000
 		address = (int*)0x7EE5A0;
@@ -349,7 +349,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 999999)
 		{
 			trophies = 999999;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 
 
@@ -360,7 +360,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 999)
 		{
 			trophies = 999;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 		//tech   10000
 		address = (int*)0x7EE5B8;
@@ -368,7 +368,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 9999)
 		{
 			trophies = 9999;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 		//tech  100000
 		address = (int*)0x7EE5C4;
@@ -376,7 +376,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 99999)
 		{
 			trophies = 99999;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 		//tech   1000000
 		address = (int*)0x7EE5D0;
@@ -384,7 +384,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 999999)
 		{
 			trophies = 999999;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 
 
@@ -397,7 +397,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 24)
 		{
 			trophies = 24;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 		//mushroom 100;
 		address = (int*)0x7EE5E8;
@@ -405,7 +405,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 99)
 		{
 			trophies = 99;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 		//mushroom 500;
 		address = (int*)0x7EE5F4;
@@ -413,7 +413,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 499)
 		{
 			trophies = 499;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 
 
@@ -424,7 +424,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 4)
 		{
 			trophies = 4;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 		//rare mushroom  25;
 		address = (int*)0x7EE60C;
@@ -432,7 +432,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 24)
 		{
 			trophies = 24;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 		//rare mushroom  100;
 		address = (int*)0x7EE618;
@@ -440,7 +440,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 99)
 		{
 			trophies = 99;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 
 
@@ -450,7 +450,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 24)
 		{
 			trophies = 24;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 
 		//		//Science items
@@ -478,7 +478,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 2)
 		{
 			trophies = 2;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 
 		//Heathens 10
@@ -487,7 +487,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 9)
 		{
 			trophies = 9;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 
 
@@ -503,7 +503,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 9)
 		{
 			trophies = 9;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 
 		//baby boy
@@ -512,7 +512,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 9)
 		{
 			trophies = 9;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 
 
@@ -532,7 +532,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 9)
 		{
 			trophies = 9;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 
 
@@ -542,7 +542,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 49)
 		{
 			trophies = 49;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 
 
@@ -568,7 +568,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 9)
 		{
 			trophies = 9;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 
 
@@ -578,7 +578,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 49)
 		{
 			trophies = 49;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 
 
@@ -588,7 +588,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 99)
 		{
 			trophies = 99;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 
 
@@ -599,7 +599,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 49)
 		{
 			trophies = 49;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 
 
@@ -610,7 +610,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 99)
 		{
 			trophies = 99;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 
 
@@ -623,7 +623,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (trophies < 99)
 		{
 			trophies = 99;
-			GhiDuLieu(address, &trophies, 4);
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 
 
