@@ -316,6 +316,76 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		GetDlgItem(IDC_TRIBUTE)->SetWindowTextA(bufferText);
 
 
+		int trophies = 0;
+
+
+		//food   1000
+		address = (int*)0x7EE57C;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 999)
+		{
+			trophies = 999;
+			GhiDuLieu(address, &trophies, 4);
+		}
+		//food   10000
+		address = (int*)0x7EE588;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 9999)
+		{
+			trophies = 9999;
+			GhiDuLieu(address, &trophies, 4);
+		}
+		//food  100000
+		address = (int*)0x7EE594;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 99999)
+		{
+			trophies = 99999;
+			GhiDuLieu(address, &trophies, 4);
+		}
+		//food  1000000
+		address = (int*)0x7EE5A0;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 999999)
+		{
+			trophies = 999999;
+			GhiDuLieu(address, &trophies, 4);
+		}
+
+
+
+		//tech  1000
+		address = (int*)0x7EE5AC;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 999)
+		{
+			trophies = 999;
+			GhiDuLieu(address, &trophies, 4);
+		}
+		//tech   10000
+		address = (int*)0x7EE5B8;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 9999)
+		{
+			trophies = 9999;
+			GhiDuLieu(address, &trophies, 4);
+		}
+		//tech  100000
+		address = (int*)0x7EE5C4;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 99999)
+		{
+			trophies = 99999;
+			GhiDuLieu(address, &trophies, 4);
+		}
+		//tech   1000000
+		address = (int*)0x7EE5D0;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 999999)
+		{
+			trophies = 999999;
+			GhiDuLieu(address, &trophies, 4);
+		}
 
 
 
