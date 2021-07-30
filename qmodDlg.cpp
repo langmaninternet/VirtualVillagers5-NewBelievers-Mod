@@ -1242,19 +1242,9 @@ void	GhiDuLieu2(
 
 void CQmodDlg::OnFastskill()
 {
-	// Virtual Villagers - New Believers.exe+3576D - D9 04 8E              - fld dword ptr [esi+ecx*4]
-	// Virtual Villagers - New Believers.exe+35770 - D8 44 24 0C           - fadd dword ptr [esp+0C]
-
-	// Virtual Villagers - New Believers.exe+35774 - D9 5C 24 08           - fstp dword ptr [esp+08]
-	// Virtual Villagers - New Believers.exe + 35778 - D9 44 24 08		  - fld dword ptr[esp + 08]
-	// Virtual Villagers - New Believers.exe+3577C - D9 14 8E              - fst dword ptr [esi+ecx*4]
-
-
-
-
-	//"Virtual Villagers - New Believers.exe"+3576D - C7 04 8E  0000C842    - mov [esi+ecx*4],42C80000
-	unsigned char dataarr[18] = { 0xC7,0x04,0x8E,0x00,0x00,0xC8,0x42, 0x90,0x90,0x90,0x90,0x90,0x90,0x90,0x90,0x90,0x90,0x90 };
-	GhiDuLieu1(L"Virtual Villagers - New Believers WndCls", L"Virtual Villagers - New Believers", NULL, 0x3576D, dataarr, 8);
+	//Virtual Villagers - New Believers.exe + 3578A - 75 0D - jne "Virtual Villagers - New Believers.exe" + 35799
+	unsigned char fastSkillData[2] = { 0x90,0x90 };
+	GhiDuLieu1(L"Virtual Villagers - New Believers WndCls", L"Virtual Villagers - New Believers", NULL, 0x3578A, fastSkillData, 2);
 
 }
 void CQmodDlg::OnMana()
