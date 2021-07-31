@@ -461,7 +461,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 			{
 				WriteProcessMemory(handle, address + i, &collectionData, 1, 0);
 
-				if (collectionArray[i] == 0)
+				if (collectionArray[i] == 0 && rand() % 5 == 1)
 				{
 					WriteProcessMemory(handle, address + i, &collectionData, 1, 0);
 					//soft break;
@@ -474,7 +474,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 			char collectionData = 1;
 			for (int i = 24; i < 48; i++)
 			{
-				if (collectionArray[i] == 0)
+				if (collectionArray[i] == 0 && rand() % 5 == 1)
 				{
 					WriteProcessMemory(handle, address + i, &collectionData, 1, 0);
 					//soft break;
