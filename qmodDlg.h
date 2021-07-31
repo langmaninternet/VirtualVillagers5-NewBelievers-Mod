@@ -15,7 +15,6 @@ class CQmodDlg : public CDialog
 {
 // Construction
 public:
-	void GhiDuLieu(int *address,void *value,int size);
 	CQmodDlg(CWnd* pParent = NULL);	// standard constructor
 
 // Dialog Data
@@ -42,23 +41,9 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	afx_msg void OnCollection();
-	afx_msg void OnChangeFood();
-	afx_msg void OnSetfocusFood();
 	virtual void OnOK();
-	afx_msg void OnChangeTech();
-	afx_msg void OnSetfocusTech();
-	afx_msg void OnLoveshark();
-	afx_msg void OnSchool();
-	afx_msg void OnWear();
-	afx_msg void OnTrophies();
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
-	afx_msg void OnMausoleum();
-	afx_msg void OnTrangweb();
-	afx_msg void OnFastskill();
-	afx_msg void OnMana();
-
 	afx_msg void OnTimer(UINT_PTR nIdEvent);
-
 	int mainTimerID;
 
 	//}}AFX_MSG

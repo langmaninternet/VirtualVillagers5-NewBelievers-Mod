@@ -39,20 +39,7 @@ BEGIN_MESSAGE_MAP(CQmodDlg, CDialog)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_COLLECTION, OnCollection)
-	ON_EN_CHANGE(IDC_FOOD, OnChangeFood)
-	ON_EN_SETFOCUS(IDC_FOOD, OnSetfocusFood)
-	ON_EN_CHANGE(IDC_TECH, OnChangeTech)
-	ON_EN_SETFOCUS(IDC_TECH, OnSetfocusTech)
-	ON_BN_CLICKED(IDC_LOVESHARK, OnLoveshark)
-	ON_BN_CLICKED(IDC_SCHOOL, OnSchool)
-	ON_BN_CLICKED(IDC_WEAR, OnWear)
-	ON_BN_CLICKED(IDC_TROPHIES, OnTrophies)
 	ON_WM_CTLCOLOR()
-	ON_BN_CLICKED(IDC_MAUSOLEUM, OnMausoleum)
-	ON_BN_CLICKED(IDC_TRANGWEB, OnTrangweb)
-	ON_BN_CLICKED(IDC_FASTSKILL, OnFastskill)
-	ON_BN_CLICKED(IDC_MANA, OnMana)
-
 	ON_WM_TIMER(OnTimer)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
@@ -60,7 +47,8 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CQmodDlg message handlers
 
-BOOL CQmodDlg::OnInitDialog()
+
+BOOL		CQmodDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
@@ -95,47 +83,159 @@ BOOL CQmodDlg::OnInitDialog()
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
+void		CQmodDlg::OnSysCommand(UINT nID, LPARAM lParam)
+{
+	CDialog::OnSysCommand(nID, lParam);
+}
+void		CQmodDlg::OnPaint()
+{
+	if (IsIconic())
+	{
+		CPaintDC dc(this); // device context for painting
 
-void	GhiDuLieu1(
-	const wchar_t* className /*= L"Virtual Villagers - New Believers WndCls"*/,
-	const wchar_t* windowName /*= L"Virtual Villagers - New Believers"*/,
-	wchar_t* moduleName /*= L"Virtual Villagers - New Believers.exe" , NULL is excute file name*/,
+		SendMessage(WM_ICONERASEBKGND, (WPARAM)dc.GetSafeHdc(), 0);
+
+		// Center icon in client rectangle
+		int cxIcon = GetSystemMetrics(SM_CXICON);
+		int cyIcon = GetSystemMetrics(SM_CYICON);
+		CRect rect;
+		GetClientRect(&rect);
+		int x = (rect.Width() - cxIcon + 1) / 2;
+		int y = (rect.Height() - cyIcon + 1) / 2;
+
+		// Draw the icon
+		dc.DrawIcon(x, y, m_hIcon);
+	}
+	else
+	{
+		CDialog::OnPaint();
+	}
+}
+HCURSOR		CQmodDlg::OnQueryDragIcon()
+{
+	return (HCURSOR)m_hIcon;
+}
+HBRUSH		CQmodDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+{
+	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
+
+	// TODO: Change any attributes of the DC here
+	switch (pWnd->GetDlgCtrlID())
+	{
+	case IDC_TACGIA:pDC->SetTextColor(RGB(0, 0, 255)); break;
+	case IDC_TRANGWEB:pDC->SetTextColor(RGB(255, 0, 0)); break;
+	}
+	// TODO: Return a different brush if the default is not desired
+	return hbr;
+}
+void		CQmodDlg::OnOK()
+{
+}
+
+
+
+
+
+/************************************************************************/
+/*                                                                      */
+/************************************************************************/
+
+
+void	GhiDuLieu0(
+	DWORD pid,
+	HANDLE hProcess,
 	DWORD baseoffset /*= 0x380DAD*/,
 	unsigned char* membuffer/*{0x90,0x90,0x90} = nop */,
 	int membufferLength /*= 3*/);
+
 
 void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 {
 	if (mainTimerID == nIdEvent)
 	{
-		OnSetfocusFood();
-		OnSetfocusTech();
-		OnFastskill();
-		OnMana();
-
-		// Noni
-		//Virtual Villagers - New Believers.exe+2D0D0 - 29 B3 587D0100        - sub [ebx+00017D58],esi
-		// 
-		// Virtual Villagers - New Believers.exe+2D0D0 - 01 B3 587D0100        - add [ebx+00017D58],esi
-		unsigned char NoniCheat[1] = { 0x01 };
-		GhiDuLieu1(L"Virtual Villagers - New Believers WndCls", L"Virtual Villagers - New Believers", NULL, 0x2D0D0, NoniCheat, 1);
-
-
-
 
 
 		HWND hwnd = ::FindWindow("Virtual Villagers - New Believers WndCls", "Virtual Villagers - New Believers");
 		if (!hwnd) return;
+
 		DWORD pid;
 		GetWindowThreadProcessId(hwnd, &pid);
 		if (pid == 0) return;
+
 		HANDLE handle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_OPERATION | PROCESS_VM_READ | PROCESS_VM_WRITE, FALSE, pid);
 		if (handle == 0) return;
+
+
+
+
 
 		char bufferText[100] = { 0 };
 		int* address = NULL;
 
 
+
+		/************************************************************************/
+		/*                                                                      */
+		/************************************************************************/
+
+
+		// Virtual Villagers - New Believers.exe+2D0D0 - 29 B3 587D0100        - sub [ebx+00017D58],esi
+		// --> Virtual Villagers - New Believers.exe+2D0D0 - 01 B3 587D0100        - add [ebx+00017D58],esi
+		unsigned char noniCheat[1] = { 0x01 };
+		GhiDuLieu0(pid, handle, 0x2D0D0, noniCheat, 1);
+
+
+		unsigned char fastSkillData[2] = { 0x90,0x90 };
+		GhiDuLieu0(pid, handle, 0x3578A, fastSkillData, 2);
+
+
+		//Virtual Villagers - New Believers.exe+5A9E3 - 29 86 647D0100        - sub [esi+00017D64],eax
+		unsigned char infManaData[1] = { 0x01 };
+		GhiDuLieu0(pid, handle, 0x5A9E3, infManaData, 1);
+
+
+		unsigned char maxManaData[2] = { 0x90,0x90 };
+		GhiDuLieu0(pid, handle, 0x5AAD6, maxManaData, 2);
+
+
+
+
+
+
+
+
+		/************************************************************************/
+		/* Food and Tech                                                        */
+		/************************************************************************/
+		address = (int*)0x7A7730;
+		ReadProcessMemory(handle, address, &m_food, 4, 0);
+		if (m_food < 99989)
+		{
+			m_food += 10;
+			WriteProcessMemory(handle, address, &m_food, 4, 0);
+		}
+
+		address = (int*)0x7A79E0;
+		ReadProcessMemory(handle, address, &m_tech, 4, 0);
+		if (m_tech < 999899 && m_tech > 100)
+		{
+			m_tech += 100;
+			WriteProcessMemory(handle, address, &m_tech, 4, 0);
+		}
+		else if (m_tech < 90)
+		{
+			if (m_tech < 1) m_tech = 1;
+			m_tech++;
+			WriteProcessMemory(handle, address, &m_tech, 4, 0);
+		}
+
+		UpdateData(FALSE);
+
+
+
+		/************************************************************************/
+		/* House                                                                */
+		/************************************************************************/
 
 		//mausoleum
 		address = (int*)0x7EE4BC;
@@ -249,7 +349,9 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		else if (houseValue >= 2000) sprintf(bufferText, "Wear - Full");
 		else sprintf(bufferText, "Wear - %d/2000", houseValue);
 		GetDlgItem(IDC_WEAR)->SetWindowTextA(bufferText);
-
+		//	temp = 1;
+		//	address = (int*)0x7EE7DC;
+		//	GhiDuLieu(address, &temp, 1);
 
 
 
@@ -271,7 +373,9 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		else if (houseValue >= 2000) sprintf(bufferText, "School - Full");
 		else sprintf(bufferText, "School - %d/2000", houseValue);
 		GetDlgItem(IDC_SCHOOL)->SetWindowTextA(bufferText);
-
+		//	temp = 1;
+		//	address = (int*)0x7EE7D0;
+		//	GhiDuLieu(address, &temp, 1);
 
 
 
@@ -324,9 +428,12 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		GetDlgItem(IDC_TRIBUTE)->SetWindowTextA(bufferText);
 
 
+
+
+		/************************************************************************/
+		/* Trophies                                                             */
+		/************************************************************************/
 		int trophies = 0;
-
-
 		//food   1000
 		address = (int*)0x7EE57C;
 		ReadProcessMemory(handle, address, &trophies, 4, 0);
@@ -359,9 +466,6 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 			trophies = 999999;
 			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
-
-
-
 		//tech  1000
 		address = (int*)0x7EE5AC;
 		ReadProcessMemory(handle, address, &trophies, 4, 0);
@@ -394,11 +498,6 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 			trophies = 999999;
 			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
-
-
-
-
-		//mushroom  007EE5DC 007EE5E8   007EE5F4
 		//mushroom 25;
 		address = (int*)0x7EE5DC;
 		ReadProcessMemory(handle, address, &trophies, 4, 0);
@@ -423,9 +522,6 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 			trophies = 499;
 			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
-
-
-
 		//rare mushroom  5;
 		address = (int*)0x7EE600;
 		ReadProcessMemory(handle, address, &trophies, 4, 0);
@@ -450,8 +546,6 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 			trophies = 99;
 			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
-
-
 		//Relics
 		address = (int*)0x7EE624;
 		ReadProcessMemory(handle, address, &trophies, 4, 0);
@@ -488,7 +582,6 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 			trophies = 2;
 			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
-
 		//Heathens 10
 		address = (int*)0x7EE66C;
 		ReadProcessMemory(handle, address, &trophies, 4, 0);
@@ -513,7 +606,6 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 			trophies = 9;
 			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
-
 		//baby boy
 		address = (int*)0x7EE6D8;
 		ReadProcessMemory(handle, address, &trophies, 4, 0);
@@ -542,8 +634,6 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 			trophies = 9;
 			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
-
-
 		//event 50;
 		address = (int*)0x7EE7BC;
 		ReadProcessMemory(handle, address, &trophies, 4, 0);
@@ -552,7 +642,6 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 			trophies = 49;
 			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
-
 
 
 		//		//3house
@@ -570,6 +659,8 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		//		address = (int*)0x7EE7DC;
 		//		GhiDuLieu(address, &temp, 1);
 		//		
+
+
 		//cured = 10;
 		address = (int*)0x7EE7EC;
 		ReadProcessMemory(handle, address, &trophies, 4, 0);
@@ -578,8 +669,6 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 			trophies = 9;
 			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
-
-
 		//cured = 50;
 		address = (int*)0x7EE7F8;
 		ReadProcessMemory(handle, address, &trophies, 4, 0);
@@ -588,8 +677,6 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 			trophies = 49;
 			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
-
-
 		//cured = 100;
 		address = (int*)0x7EE804;
 		ReadProcessMemory(handle, address, &trophies, 4, 0);
@@ -598,9 +685,6 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 			trophies = 99;
 			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
-
-
-
 		//dot lua 50
 		address = (int*)0x7EE810;
 		ReadProcessMemory(handle, address, &trophies, 4, 0);
@@ -609,9 +693,6 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 			trophies = 49;
 			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
-
-
-
 		//dot lua time
 		address = (int*)0x7EE81C;
 		ReadProcessMemory(handle, address, &trophies, 4, 0);
@@ -620,11 +701,6 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 			trophies = 99;
 			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
-
-
-
-
-
 		//100 bo quan ao
 		address = (int*)0x7EE834;
 		ReadProcessMemory(handle, address, &trophies, 4, 0);
@@ -659,48 +735,10 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 }
 
 
-void CQmodDlg::OnSysCommand(UINT nID, LPARAM lParam)
-{
-	CDialog::OnSysCommand(nID, lParam);
-}
 
-// If you add a minimize button to your dialog, you will need the code below
-//  to draw the icon.  For MFC applications using the document/view model,
-//  this is automatically done for you by the framework.
 
-void CQmodDlg::OnPaint()
-{
-	if (IsIconic())
-	{
-		CPaintDC dc(this); // device context for painting
 
-		SendMessage(WM_ICONERASEBKGND, (WPARAM)dc.GetSafeHdc(), 0);
-
-		// Center icon in client rectangle
-		int cxIcon = GetSystemMetrics(SM_CXICON);
-		int cyIcon = GetSystemMetrics(SM_CYICON);
-		CRect rect;
-		GetClientRect(&rect);
-		int x = (rect.Width() - cxIcon + 1) / 2;
-		int y = (rect.Height() - cyIcon + 1) / 2;
-
-		// Draw the icon
-		dc.DrawIcon(x, y, m_hIcon);
-	}
-	else
-	{
-		CDialog::OnPaint();
-	}
-}
-
-// The system calls this to obtain the cursor to display while the user drags
-//  the minimized window.
-HCURSOR CQmodDlg::OnQueryDragIcon()
-{
-	return (HCURSOR)m_hIcon;
-}
-
-void CQmodDlg::GhiDuLieu(int* address, void* value, int size)
+void GhiDuLieu(int* address, void* value, int size)
 {
 	HWND hwnd = ::FindWindow("Virtual Villagers - New Believers WndCls", "Virtual Villagers - New Believers");
 	if (!hwnd) return;
@@ -736,337 +774,7 @@ void CQmodDlg::OnCollection()
 	GhiDuLieu(address, &temp, 1);
 }
 
-void CQmodDlg::OnChangeFood()
-{
-	// TODO: If this is a RICHEDIT control, the control will not
-	// send this notification unless you override the CDialog::OnInitDialog()
-	// function and call CRichEditCtrl().SetEventMask()
-	// with the ENM_CHANGE flag ORed into the mask.
 
-	// TODO: Add your control notification handler code here
-	UpdateData(TRUE);
-	int* address = (int*)0x7A7730;
-	GhiDuLieu(address, &m_food, 4);
-}
-
-void CQmodDlg::OnSetfocusFood()
-{
-	// TODO: Add your control notification handler code here
-
-	HWND hwnd = ::FindWindow("Virtual Villagers - New Believers WndCls", "Virtual Villagers - New Believers");
-	if (!hwnd) return;
-	DWORD pid;
-	GetWindowThreadProcessId(hwnd, &pid);
-	HANDLE handle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_OPERATION | PROCESS_VM_READ, FALSE, pid);
-
-	int* address = (int*)0x7A7730;
-	ReadProcessMemory(handle, address, &m_food, 4, 0);
-
-	if (m_food < 99989)
-	{
-		m_food += 10;
-		int* address = (int*)0x7A7730;
-		GhiDuLieu(address, &m_food, 4);
-	}
-	CloseHandle(handle);
-
-	UpdateData(FALSE);
-
-}
-
-void CQmodDlg::OnOK()
-{
-	// TODO: Add extra validation here
-
-	//CDialog::OnOK();
-}
-
-void CQmodDlg::OnChangeTech()
-{
-	// TODO: If this is a RICHEDIT control, the control will not
-	// send this notification unless you override the CDialog::OnInitDialog()
-	// function and call CRichEditCtrl().SetEventMask()
-	// with the ENM_CHANGE flag ORed into the mask.
-
-	// TODO: Add your control notification handler code here
-	UpdateData(TRUE);
-	int* address = (int*)0x7A79E0;
-	GhiDuLieu(address, &m_tech, 4);
-}
-
-void CQmodDlg::OnSetfocusTech()
-{
-	// TODO: Add your control notification handler code here
-	HWND hwnd = ::FindWindow("Virtual Villagers - New Believers WndCls", "Virtual Villagers - New Believers");
-	if (!hwnd) return;
-	DWORD pid;
-	GetWindowThreadProcessId(hwnd, &pid);
-	HANDLE handle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_OPERATION | PROCESS_VM_READ, FALSE, pid);
-
-	int* address = (int*)0x7A79E0;
-	ReadProcessMemory(handle, address, &m_tech, 4, 0);
-	if (m_tech < 999899 && m_tech > 100)
-	{
-		m_tech += 100;
-		int* address = (int*)0x7A79E0;
-		GhiDuLieu(address, &m_tech, 4);
-	}
-	else if (m_tech < 90)
-	{
-		if (m_tech < 1) m_tech = 1;
-		m_tech++;
-		int* address = (int*)0x7A79E0;
-		GhiDuLieu(address, &m_tech, 4);
-	}
-	CloseHandle(handle);
-	UpdateData(FALSE);
-}
-
-void CQmodDlg::OnLoveshark()
-{
-	// TODO: Add your control notification handler code here
-	int* address = (int*)0x7EE3D8;
-	short int temp = 2000;
-	GhiDuLieu(address, &temp, 2);
-}
-
-void CQmodDlg::OnSchool()
-{
-	// TODO: Add your control notification handler code here
-	int* address = (int*)0x7EE3E0;
-	short int temp = 2000;
-	GhiDuLieu(address, &temp, 2);
-	temp = 1;
-	address = (int*)0x7EE7D0;
-	GhiDuLieu(address, &temp, 1);
-
-}
-
-void CQmodDlg::OnWear()
-{
-	// TODO: Add your control notification handler code here
-	int* address = (int*)0x7EE3D0;
-	short int temp = 2000;
-
-	GhiDuLieu(address, &temp, 2);
-	temp = 1;
-	address = (int*)0x7EE7DC;
-	GhiDuLieu(address, &temp, 1);
-}
-
-
-void CQmodDlg::OnTrophies()
-{
-	// TODO: Add your control notification handler code here
-	int* address;
-	int temp;
-
-	//food     007EE588   007EE594    007EE5A0 
-	temp = 1000;
-	address = (int*)0x7EE57C;
-	GhiDuLieu(address, &temp, 4);
-
-	temp = 10000;
-	address = (int*)0x7EE588;
-	GhiDuLieu(address, &temp, 4);
-
-	temp = 100000;
-	address = (int*)0x7EE594;
-	GhiDuLieu(address, &temp, 4);
-
-	temp = 1000000;
-	address = (int*)0x7EE5A0;
-	GhiDuLieu(address, &temp, 4);
-
-	//tech     007EE588   007EE594    007EE5A0 
-	temp = 1000;
-	address = (int*)0x7EE5AC;
-	GhiDuLieu(address, &temp, 4);
-
-	temp = 10000;
-	address = (int*)0x7EE5B8;
-	GhiDuLieu(address, &temp, 4);
-
-	temp = 100000;
-	address = (int*)0x7EE5C4;
-	GhiDuLieu(address, &temp, 4);
-
-	temp = 1000000;
-	address = (int*)0x7EE5D0;
-	GhiDuLieu(address, &temp, 4);
-
-
-	//mushroom  007EE5DC 007EE5E8   007EE5F4
-	temp = 25;
-	address = (int*)0x7EE5DC;
-	GhiDuLieu(address, &temp, 4);
-
-	temp = 100;
-	address = (int*)0x7EE5E8;
-	GhiDuLieu(address, &temp, 4);
-
-	temp = 500;
-	address = (int*)0x7EE5F4;
-	GhiDuLieu(address, &temp, 4);
-
-
-	//rare mushroom   007EE600   007EE60C  007EE618
-	temp = 5;
-	address = (int*)0x7EE600;
-	GhiDuLieu(address, &temp, 4);
-
-	temp = 25;
-	address = (int*)0x7EE60C;
-	GhiDuLieu(address, &temp, 4);
-
-	temp = 100;
-	address = (int*)0x7EE618;
-	GhiDuLieu(address, &temp, 4);
-
-
-	//Relics
-	temp = 24;
-	address = (int*)0x7EE624;
-	GhiDuLieu(address, &temp, 4);
-
-	temp = 24;
-	address = (int*)0x7EE630;
-	GhiDuLieu(address, &temp, 4);
-
-	temp = 2;
-	address = (int*)0x7EE63C;
-	GhiDuLieu(address, &temp, 4);
-
-	//heath
-	temp = 3;
-	address = (int*)0x7EE660;
-	GhiDuLieu(address, &temp, 4);
-
-	temp = 10;
-	address = (int*)0x7EE66C;
-	GhiDuLieu(address, &temp, 4);
-
-
-	//buom bay
-	temp = 15;
-	address = (int*)0x7EE684;
-	GhiDuLieu(address, &temp, 4);
-
-
-	//baby girl
-	temp = 10;
-	address = (int*)0x7EE6CC;
-	GhiDuLieu(address, &temp, 4);
-
-	//baby boy
-	temp = 10;
-	address = (int*)0x7EE6D8;
-	GhiDuLieu(address, &temp, 4);
-
-	//master skill
-	temp = 10;
-	address = (int*)0x7EE750;
-	GhiDuLieu(address, &temp, 4);
-
-
-	//event  007EE7B0  007EE7BC   
-	temp = 10;
-	address = (int*)0x7EE7B0;
-	GhiDuLieu(address, &temp, 4);
-
-	temp = 50;
-	address = (int*)0x7EE7BC;
-	GhiDuLieu(address, &temp, 4);
-
-
-	//3house
-	temp = 1;
-	address = (int*)0x7EE7C4;
-	GhiDuLieu(address, &temp, 1);
-
-	//school
-	temp = 1;
-	address = (int*)0x7EE7D0;
-	GhiDuLieu(address, &temp, 1);
-
-	// wear
-	temp = 1;
-	address = (int*)0x7EE7DC;
-	GhiDuLieu(address, &temp, 1);
-
-	//chua benh
-	temp = 10;
-	address = (int*)0x7EE7EC;
-	GhiDuLieu(address, &temp, 4);
-
-	temp = 50;
-	address = (int*)0x7EE7F8;
-	GhiDuLieu(address, &temp, 4);
-
-	temp = 100;
-	address = (int*)0x7EE804;
-	GhiDuLieu(address, &temp, 4);
-
-	//dot lua
-	temp = 50;
-	address = (int*)0x7EE810;
-	GhiDuLieu(address, &temp, 4);
-
-	//dot lua time
-	temp = 100;
-	address = (int*)0x7EE81C;
-	GhiDuLieu(address, &temp, 4);
-
-	//100 bo quan ao
-	temp = 100;
-	address = (int*)0x7EE834;
-	GhiDuLieu(address, &temp, 4);
-
-	temp = 10;
-	address = (int*)0x7EE84C;
-	GhiDuLieu(address, &temp, 4);
-
-
-	temp = 10;
-	address = (int*)0x7EE87C;
-	GhiDuLieu(address, &temp, 4);
-
-	temp = 50;
-	address = (int*)0x7EE888;
-	GhiDuLieu(address, &temp, 4);
-
-
-
-
-}
-
-HBRUSH CQmodDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
-
-	// TODO: Change any attributes of the DC here
-	switch (pWnd->GetDlgCtrlID())
-	{
-	case IDC_TACGIA:pDC->SetTextColor(RGB(0, 0, 255)); break;
-	case IDC_TRANGWEB:pDC->SetTextColor(RGB(255, 0, 0)); break;
-	}
-	// TODO: Return a different brush if the default is not desired
-	return hbr;
-}
-
-void CQmodDlg::OnMausoleum()
-{
-	// TODO: Add your control notification handler code here
-	int* address = (int*)0x7EE4BC;
-	float temp = 1.0f;
-	GhiDuLieu(address, &temp, 4);
-}
-
-void CQmodDlg::OnTrangweb()
-{
-	// TODO: Add your control notification handler code here
-
-}
 
 
 
@@ -1122,6 +830,46 @@ DWORD	GetModuleExeBase(DWORD th32ProcessID, wchar_t* lpModuleName)
 	CloseHandle(hSnapShot);
 	return NULL;
 }
+
+
+
+/************************************************************************/
+/* For module name is same as excute file name                          */
+/* "Virtual Villagers - New Believers.exe"+5AAD6                        */
+/************************************************************************/
+void	GhiDuLieu0(
+	DWORD pid,
+	HANDLE hProcess,
+	DWORD baseoffset /*= 0x380DAD*/,
+	unsigned char* membuffer/*{0x90,0x90,0x90} = nop */,
+	int membufferLength /*= 3*/)
+{
+	if (!pid) return;
+	PROCESSENTRY32W entry;
+	entry.dwSize = sizeof(PROCESSENTRY32W);
+	HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, NULL);
+	if (Process32FirstW(snapshot, &entry) == TRUE)
+	{
+		while (Process32NextW(snapshot, &entry) == TRUE)
+		{
+			if (entry.th32ProcessID == pid)
+			{
+				DWORD baseaddress = GetModuleExeBase(entry.th32ProcessID, entry.szExeFile);
+				if (baseaddress)
+				{
+					DWORD address = baseaddress + baseoffset;
+					if (address)
+					{
+						WriteProcessMemory(hProcess, (void*)address, membuffer, membufferLength, 0);
+					}
+				}
+			}
+		}
+	}
+	CloseHandle(snapshot);
+}
+
+
 
 void	GhiDuLieu1(
 	const wchar_t* className /*= L"Virtual Villagers - New Believers WndCls"*/,
@@ -1199,22 +947,3 @@ void	GhiDuLieu2(
 
 
 
-
-
-void CQmodDlg::OnFastskill()
-{
-	//Virtual Villagers - New Believers.exe + 3578A - 75 0D - jne "Virtual Villagers - New Believers.exe" + 35799
-	unsigned char fastSkillData[2] = { 0x90,0x90 };
-	GhiDuLieu1(L"Virtual Villagers - New Believers WndCls", L"Virtual Villagers - New Believers", NULL, 0x3578A, fastSkillData, 2);
-
-}
-void CQmodDlg::OnMana()
-{
-	//Virtual Villagers - New Believers.exe+5A9E3 - 29 86 647D0100        - sub [esi+00017D64],eax
-	unsigned char infManaData[1] = { 0x01 };
-	GhiDuLieu1(L"Virtual Villagers - New Believers WndCls", L"Virtual Villagers - New Believers", NULL, 0x5A9E3, infManaData, 1);
-
-	unsigned char maxManaData[2] = { 0x90,0x90 };
-	GhiDuLieu1(L"Virtual Villagers - New Believers WndCls", L"Virtual Villagers - New Believers", NULL, 0x5AAD6, maxManaData, 2);
-
-}
