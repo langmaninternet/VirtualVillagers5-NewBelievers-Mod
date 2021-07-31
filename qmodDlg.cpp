@@ -454,7 +454,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 				countRelicItems++;
 			}
 		}
-		if (countScientificItems < 24)
+		if (countScientificItems < 23)
 		{
 			char collectionData = 1;
 			for (int i = 0; i < 24; i++)
@@ -469,7 +469,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 				}
 			}
 		}
-		else if (countRelicItems < 24)
+		else if (countRelicItems < 23)
 		{
 			char collectionData = 1;
 			for (int i = 24; i < 48; i++)
