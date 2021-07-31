@@ -22,6 +22,7 @@ public:
 	enum { IDD = IDD_QMOD_DIALOG };
 	int		m_food;
 	int		m_tech;
+	int		mainTimerID;
 	//}}AFX_DATA
 
 	// ClassWizard generated virtual function overrides
@@ -40,11 +41,10 @@ protected:
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
-	afx_msg void OnCollection();
 	virtual void OnOK();
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg void OnTimer(UINT_PTR nIdEvent);
-	int mainTimerID;
+
 
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()

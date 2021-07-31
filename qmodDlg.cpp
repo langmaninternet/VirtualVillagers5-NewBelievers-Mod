@@ -19,9 +19,11 @@ CQmodDlg::CQmodDlg(CWnd* pParent /*=NULL*/)
 	//{{AFX_DATA_INIT(CQmodDlg)
 	m_food = 0;
 	m_tech = 0;
+	mainTimerID = 0;
 	//}}AFX_DATA_INIT
 	// Note that LoadIcon does not require a subsequent DestroyIcon in Win32
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+
 }
 
 void CQmodDlg::DoDataExchange(CDataExchange* pDX)
@@ -38,9 +40,8 @@ BEGIN_MESSAGE_MAP(CQmodDlg, CDialog)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-	ON_BN_CLICKED(IDC_COLLECTION, OnCollection)
 	ON_WM_CTLCOLOR()
-	ON_WM_TIMER(OnTimer)
+	ON_WM_TIMER()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -58,17 +59,19 @@ BOOL		CQmodDlg::OnInitDialog()
 	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
 	ASSERT(IDM_ABOUTBOX < 0xF000);
 
-	CMenu* pSysMenu = GetSystemMenu(FALSE);
-	if (pSysMenu != NULL)
-	{
-		CString strAboutMenu;
-		strAboutMenu.LoadString(IDS_ABOUTBOX);
-		if (!strAboutMenu.IsEmpty())
-		{
-			pSysMenu->AppendMenu(MF_SEPARATOR);
-			pSysMenu->AppendMenu(MF_STRING, IDM_ABOUTBOX, strAboutMenu);
-		}
-	}
+	//	CMenu* pSysMenu = GetSystemMenu(FALSE);
+	//	if (pSysMenu != NULL)
+	//	{
+	//		CString strAboutMenu;
+	//		strAboutMenu.LoadString(IDS_ABOUTBOX);
+	//		if (!strAboutMenu.IsEmpty())
+	//		{
+	//			pSysMenu->AppendMenu(MF_SEPARATOR);
+	//			pSysMenu->AppendMenu(MF_STRING, IDM_ABOUTBOX, strAboutMenu);
+	//		}
+	//	}
+
+
 
 	// Set the icon for this dialog.  The framework does this automatically
 	//  when the application's main window is not a dialog
@@ -244,20 +247,20 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (mausoleum > 200.0)
 		{
 			mausoleum -= 100.0;
-			mausoleum = floor(mausoleum);
+			mausoleum = (float)floor(mausoleum);
 		}
 		else if (mausoleum > 20.0)
 		{
 			mausoleum -= 10.0;
-			mausoleum = floor(mausoleum);
+			mausoleum = (float)floor(mausoleum);
 		}
 		else if (mausoleum > 2.0)
 		{
 			mausoleum--;
-			mausoleum = floor(mausoleum);
+			mausoleum = (float)floor(mausoleum);
 		}
 		WriteProcessMemory(handle, address, &mausoleum, 4, 0);
-		sprintf(bufferText, "Mausoleum - %0.1f", mausoleum);
+		sprintf_s(bufferText, "Mausoleum - %0.1f", mausoleum);
 		GetDlgItem(IDC_MAUSOLEUM)->SetWindowTextA(bufferText);
 
 		address = (int*)0x7EE3B8;
@@ -273,9 +276,9 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 			houseValue += 1;
 			WriteProcessMemory(handle, address, &houseValue, 2, 0);
 		}
-		if (houseValue == 0) sprintf(bufferText, "House 1 - Auto");
-		else if (houseValue >= 2000) sprintf(bufferText, "House 1 - Full");
-		else sprintf(bufferText, "House 1 - %d/2000", houseValue);
+		if (houseValue == 0) sprintf_s(bufferText, "House 1 - Auto");
+		else if (houseValue >= 2000) sprintf_s(bufferText, "House 1 - Full");
+		else sprintf_s(bufferText, "House 1 - %d/2000", houseValue);
 		GetDlgItem(IDC_HOUSE)->SetWindowTextA(bufferText);
 		//	temp = 1;
 		//	address = (int*)0x7EE7C4;
@@ -297,9 +300,9 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 			houseValue += 1;
 			WriteProcessMemory(handle, address, &houseValue, 2, 0);
 		}
-		if (houseValue == 0) sprintf(bufferText, "House 2 - Auto");
-		else if (houseValue >= 2000) sprintf(bufferText, "House 2 - Full");
-		else sprintf(bufferText, "House 2 - %d/2000", houseValue);
+		if (houseValue == 0) sprintf_s(bufferText, "House 2 - Auto");
+		else if (houseValue >= 2000) sprintf_s(bufferText, "House 2 - Full");
+		else sprintf_s(bufferText, "House 2 - %d/2000", houseValue);
 		GetDlgItem(IDC_HOUSE2)->SetWindowTextA(bufferText);
 		//	temp = 1;
 		//	address = (int*)0x7EE7C4;
@@ -321,9 +324,9 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 			houseValue += 1;
 			WriteProcessMemory(handle, address, &houseValue, 2, 0);
 		}
-		if (houseValue == 0) sprintf(bufferText, "House 3 - Auto");
-		else if (houseValue >= 2000) sprintf(bufferText, "House 3 - Full");
-		else sprintf(bufferText, "House 3 - %d/2000", houseValue);
+		if (houseValue == 0) sprintf_s(bufferText, "House 3 - Auto");
+		else if (houseValue >= 2000) sprintf_s(bufferText, "House 3 - Full");
+		else sprintf_s(bufferText, "House 3 - %d/2000", houseValue);
 		GetDlgItem(IDC_HOUSE3)->SetWindowTextA(bufferText);
 		//	temp = 1;
 		//	address = (int*)0x7EE7C4;
@@ -345,9 +348,9 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 			houseValue += 1;
 			WriteProcessMemory(handle, address, &houseValue, 2, 0);
 		}
-		if (houseValue == 0) sprintf(bufferText, "Wear - Auto");
-		else if (houseValue >= 2000) sprintf(bufferText, "Wear - Full");
-		else sprintf(bufferText, "Wear - %d/2000", houseValue);
+		if (houseValue == 0) sprintf_s(bufferText, "Wear - Auto");
+		else if (houseValue >= 2000) sprintf_s(bufferText, "Wear - Full");
+		else sprintf_s(bufferText, "Wear - %d/2000", houseValue);
 		GetDlgItem(IDC_WEAR)->SetWindowTextA(bufferText);
 		//	temp = 1;
 		//	address = (int*)0x7EE7DC;
@@ -369,9 +372,9 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 			houseValue += 1;
 			WriteProcessMemory(handle, address, &houseValue, 2, 0);
 		}
-		if (houseValue == 0) sprintf(bufferText, "School - Auto");
-		else if (houseValue >= 2000) sprintf(bufferText, "School - Full");
-		else sprintf(bufferText, "School - %d/2000", houseValue);
+		if (houseValue == 0) sprintf_s(bufferText, "School - Auto");
+		else if (houseValue >= 2000) sprintf_s(bufferText, "School - Full");
+		else sprintf_s(bufferText, "School - %d/2000", houseValue);
 		GetDlgItem(IDC_SCHOOL)->SetWindowTextA(bufferText);
 		//	temp = 1;
 		//	address = (int*)0x7EE7D0;
@@ -393,9 +396,9 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 			houseValue += 1;
 			WriteProcessMemory(handle, address, &houseValue, 2, 0);
 		}
-		if (houseValue == 0) sprintf(bufferText, "LoveShark - Auto");
-		else if (houseValue >= 2000) sprintf(bufferText, "LoveShark - Full");
-		else sprintf(bufferText, "LoveShark - %d/2000", houseValue);
+		if (houseValue == 0) sprintf_s(bufferText, "LoveShark - Auto");
+		else if (houseValue >= 2000) sprintf_s(bufferText, "LoveShark - Full");
+		else sprintf_s(bufferText, "LoveShark - %d/2000", houseValue);
 		GetDlgItem(IDC_LOVESHARK)->SetWindowTextA(bufferText);
 
 
@@ -422,9 +425,9 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		//		houseValue += 10;
 		//		WriteProcessMemory(handle, address, &houseValue, 2, 0);
 		//	}
-		if (houseValue == 0) sprintf(bufferText, "Tribute - Auto");
-		else if (houseValue >= 2000) sprintf(bufferText, "Tribute - Full");
-		else sprintf(bufferText, "Tribute - %d/2000", houseValue);
+		if (houseValue == 0) sprintf_s(bufferText, "Tribute - Auto");
+		else if (houseValue >= 2000) sprintf_s(bufferText, "Tribute - Full");
+		else sprintf_s(bufferText, "Tribute - %d/2000", houseValue);
 		GetDlgItem(IDC_TRIBUTE)->SetWindowTextA(bufferText);
 
 
@@ -726,56 +729,34 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		//		address = (int*)0x7EE888;
 		//		GhiDuLieu(address, &temp, 4);
 
+		/************************************************************************/
+		/* Collection                                                           */
+		/************************************************************************/
+		address = (int*)0x7E93D0;
+		int countLeftCollection = 0;
+		int countRightCollection = 0;
+		for (int i = 0; i < 48; i++)
+		{
+			char tempData = 0;
+			ReadProcessMemory(handle, address + i, &tempData, 1, 0);
+			if (tempData)
+			{
+				if (i < 24)
+				{
+					countLeftCollection++;
+				}
+				else
+				{
+					countRightCollection++;
+				}
 
+			}
 
-
+		}
 
 		CloseHandle(handle);
 	}
 }
-
-
-
-
-
-void GhiDuLieu(int* address, void* value, int size)
-{
-	HWND hwnd = ::FindWindow("Virtual Villagers - New Believers WndCls", "Virtual Villagers - New Believers");
-	if (!hwnd) return;
-	DWORD pid;
-	GetWindowThreadProcessId(hwnd, &pid);
-	HANDLE handle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_OPERATION | PROCESS_VM_WRITE, FALSE, pid);
-	WriteProcessMemory(handle, address, value, size, 0);
-	CloseHandle(handle);
-}
-
-
-void CQmodDlg::OnCollection()
-{
-	// TODO: Add your control notification handler code here
-	HWND hwnd = ::FindWindow("Virtual Villagers - New Believers WndCls", "Virtual Villagers - New Believers");
-	if (!hwnd) return;
-	DWORD pid;
-	GetWindowThreadProcessId(hwnd, &pid);
-	HANDLE handle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_OPERATION | PROCESS_VM_WRITE, FALSE, pid);
-
-	int* address = (int*)0x7E93D0;
-	char temp = 1;
-	for (int i = 0; i < 48; i++, address++)
-		WriteProcessMemory(handle, address, &temp, 1, 0);
-
-	address = (int*)0x7EE620;
-	GhiDuLieu(address, &temp, 1);
-
-	address = (int*)0x7EE62C;
-	GhiDuLieu(address, &temp, 1);
-
-	address = (int*)0x7EE638;
-	GhiDuLieu(address, &temp, 1);
-}
-
-
-
 
 
 
@@ -830,6 +811,24 @@ DWORD	GetModuleExeBase(DWORD th32ProcessID, wchar_t* lpModuleName)
 	CloseHandle(hSnapShot);
 	return NULL;
 }
+
+
+
+
+
+void GhiDuLieu(int* address, void* value, int size)
+{
+	HWND hwnd = ::FindWindow("Virtual Villagers - New Believers WndCls", "Virtual Villagers - New Believers");
+	if (!hwnd) return;
+	DWORD pid;
+	GetWindowThreadProcessId(hwnd, &pid);
+	HANDLE handle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_OPERATION | PROCESS_VM_WRITE, FALSE, pid);
+	WriteProcessMemory(handle, address, value, size, 0);
+	CloseHandle(handle);
+}
+
+
+
 
 
 
