@@ -432,6 +432,71 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 
 
 
+		/************************************************************************/
+		/* Collection                                                           */
+		/************************************************************************/
+		address = (int*)0x7E93D0;
+		int collectionArray[48] = { 0 };
+		ReadProcessMemory(handle, address, collectionArray, 48 * 4, 0);
+		int countScientificItems = 0;
+		int countRelicItems = 0;
+		for (int i = 0; i < 24; i++)
+		{
+			if (collectionArray[i])
+			{
+				countScientificItems++;
+			}
+		}
+		for (int i = 24; i < 48; i++)
+		{
+			if (collectionArray[i])
+			{
+				countRelicItems++;
+			}
+		}
+		if (countScientificItems < 24)
+		{
+			char collectionData = 1;
+			for (int i = 0; i < 24; i++)
+			{
+				WriteProcessMemory(handle, address + i, &collectionData, 1, 0);
+
+				if (collectionArray[i] == 0)
+				{
+					WriteProcessMemory(handle, address + i, &collectionData, 1, 0);
+					//soft break;
+					i = 99;
+				}
+			}
+		}
+		else if (countRelicItems < 24)
+		{
+			char collectionData = 1;
+			for (int i = 24; i < 48; i++)
+			{
+				if (collectionArray[i] == 0)
+				{
+					WriteProcessMemory(handle, address + i, &collectionData, 1, 0);
+					//soft break;
+					i = 99;
+				}
+			}
+		}
+
+		if (countScientificItems + countRelicItems < 48)
+		{
+			sprintf_s(bufferText, "Collection - %d+%d/48", countScientificItems, countRelicItems);
+		}
+		else if (countScientificItems + countRelicItems == 48)
+		{
+			sprintf_s(bufferText, "Collection - Full");
+		}
+		else
+		{
+			sprintf_s(bufferText, "Collection - Auto");
+		}
+		GetDlgItem(IDC_COLLECTION)->SetWindowTextA(bufferText);
+
 
 		/************************************************************************/
 		/* Trophies                                                             */
@@ -552,28 +617,27 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		//Relics
 		address = (int*)0x7EE624;
 		ReadProcessMemory(handle, address, &trophies, 4, 0);
-		if (trophies < 24)
+		if (trophies != countRelicItems)
 		{
-			trophies = 24;
+			trophies = countRelicItems;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+		//Science items
+		address = (int*)0x7EE630;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies != countScientificItems)
+		{
+			trophies = countScientificItems;
 			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		}
 
-		//		//Science items
-		//		address = (int*)0x7EE630;
-		//		ReadProcessMemory(handle, address, &trophies, 4, 0);
-		//		if (trophies < 25)
-		//		{
-		//			trophies = 25;
-		//			GhiDuLieu(address, &trophies, 4);
-		//		}
-		//		
 		//		//Master collector
 		//		address = (int*)0x7EE63C;
 		//		ReadProcessMemory(handle, address, &trophies, 4, 0);
 		//		if (trophies < 2)
 		//		{
 		//			trophies = 2;
-		//			GhiDuLieu(address, &trophies, 4);
+		//			WriteProcessMemory(handle, address, &trophies, 4, 0);
 		//		}
 
 
@@ -598,7 +662,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		//		//buom bay
 		//		temp = 15;
 		//		address = (int*)0x7EE684;
-		//		GhiDuLieu(address, &temp, 4);
+		//		WriteProcessMemory(handle, address, &trophies, 4, 0);
 
 
 		//baby girl
@@ -624,7 +688,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		//		//master skill
 		//		temp = 10;
 		//		address = (int*)0x7EE750;
-		//		GhiDuLieu(address, &temp, 4);
+		//		WriteProcessMemory(handle, address, &trophies, 4, 0);
 		//		
 		//		
 
@@ -718,41 +782,19 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 
 		//		temp = 10;
 		//		address = (int*)0x7EE84C;
-		//		GhiDuLieu(address, &temp, 4);
+		//		WriteProcessMemory(handle, address, &trophies, 4, 0);
 		//		
 		//		
 		//		temp = 10;
 		//		address = (int*)0x7EE87C;
-		//		GhiDuLieu(address, &temp, 4);
+		//		WriteProcessMemory(handle, address, &trophies, 4, 0);
 		//		
 		//		temp = 50;
 		//		address = (int*)0x7EE888;
-		//		GhiDuLieu(address, &temp, 4);
+		//		WriteProcessMemory(handle, address, &trophies, 4, 0);
 
-		/************************************************************************/
-		/* Collection                                                           */
-		/************************************************************************/
-		address = (int*)0x7E93D0;
-		int countLeftCollection = 0;
-		int countRightCollection = 0;
-		for (int i = 0; i < 48; i++)
-		{
-			char tempData = 0;
-			ReadProcessMemory(handle, address + i, &tempData, 1, 0);
-			if (tempData)
-			{
-				if (i < 24)
-				{
-					countLeftCollection++;
-				}
-				else
-				{
-					countRightCollection++;
-				}
 
-			}
 
-		}
 
 		CloseHandle(handle);
 	}
