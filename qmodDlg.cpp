@@ -214,7 +214,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		ReadProcessMemory(handle, address, &m_food, 4, 0);
 		if (m_food < 99989)
 		{
-			m_food += 10;
+			m_food += 100;
 			WriteProcessMemory(handle, address, &m_food, 4, 0);
 		}
 
@@ -222,7 +222,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		ReadProcessMemory(handle, address, &m_tech, 4, 0);
 		if (m_tech < 999899 && m_tech > 100)
 		{
-			m_tech += 100;
+			m_tech += 1000;
 			WriteProcessMemory(handle, address, &m_tech, 4, 0);
 		}
 		else if (m_tech < 90)
