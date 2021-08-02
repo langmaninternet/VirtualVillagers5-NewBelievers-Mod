@@ -457,7 +457,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (countScientificItems < 23)
 		{
 			char collectionData = 1;
-			for (int i = 0; i < 24; i++)
+			for (int i = 0; i < 23; i++)
 			{
 				WriteProcessMemory(handle, address + i, &collectionData, 1, 0);
 
