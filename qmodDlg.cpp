@@ -631,15 +631,6 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 				WriteProcessMemory(handle, address, &trophies, 4, 0);
 			}
 
-			//		//Master collector
-			//		address = (int*)0x7EE63C;
-			//		ReadProcessMemory(handle, address, &trophies, 4, 0);
-			//		if (trophies < 2)
-			//		{
-			//			trophies = 2;
-			//			WriteProcessMemory(handle, address, &trophies, 4, 0);
-			//		}
-
 
 			//Heathens 3
 			address = (int*)0x7EE660;
@@ -659,10 +650,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 			}
 
 
-			//		//buom bay
-			//		temp = 15;
-			//		address = (int*)0x7EE684;
-			//		WriteProcessMemory(handle, address, &trophies, 4, 0);
+
 
 
 			//baby girl
@@ -685,12 +673,6 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 
 
 
-			//		//master skill
-			//		temp = 10;
-			//		address = (int*)0x7EE750;
-			//		WriteProcessMemory(handle, address, &trophies, 4, 0);
-			//		
-			//		
 
 
 			//event 10;
@@ -709,23 +691,6 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 				trophies = 49;
 				WriteProcessMemory(handle, address, &trophies, 4, 0);
 			}
-
-
-			//		//3house
-			//		temp = 1;
-			//		address = (int*)0x7EE7C4;
-			//		GhiDuLieu(address, &temp, 1);
-			//		
-			//		//school
-			//		temp = 1;
-			//		address = (int*)0x7EE7D0;
-			//		GhiDuLieu(address, &temp, 1);
-			//		
-			//		// wear
-			//		temp = 1;
-			//		address = (int*)0x7EE7DC;
-			//		GhiDuLieu(address, &temp, 1);
-			//		
 
 
 			//cured = 10;
@@ -779,19 +744,6 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 
 
 
-
-			//		temp = 10;
-			//		address = (int*)0x7EE84C;
-			//		WriteProcessMemory(handle, address, &trophies, 4, 0);
-			//		
-			//		
-			//		temp = 10;
-			//		address = (int*)0x7EE87C;
-			//		WriteProcessMemory(handle, address, &trophies, 4, 0);
-			//		
-			//		temp = 50;
-			//		address = (int*)0x7EE888;
-			//		WriteProcessMemory(handle, address, &trophies, 4, 0);
 
 
 		}
