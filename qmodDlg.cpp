@@ -198,16 +198,18 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		/* Skill                                                                */
 		/************************************************************************/
 		//Always get skill point
-		//Virtual Villagers - New Believers.exe+357C2 - F6 C4 41              - test ah,41
-		unsigned char always_get_skill_point[26] = { 0xD9, 0x04, 0x8E,
+		// Virtual Villagers - New Believers.exe+357C0 - DFE0                  - fnstsw ax
+		// Virtual Villagers - New Believers.exe+357C2 - F6 C4 41              - test ah,41
+		unsigned char always_get_skill_point[28] = { 0xD9, 0x04, 0x8E,
 			0xD8, 0x44, 0x24, 0x0C,			
 			0xD8, 0x44, 0x24, 0x0C,
-			0x90, 0x90, 0x90,
 			0xD8, 0x44, 0x24, 0x0C,
 			0xD8, 0x44, 0x24, 0x0C,
 			0xD8, 0x44, 0x24, 0x0C,
+			0xD8, 0x44, 0x24, 0x0C,
+			0x90,
 		};
-		GhiDuLieu0(pid, handle, 0x357C2, always_get_skill_point, 26);
+		GhiDuLieu0(pid, handle, 0x357C0, always_get_skill_point, 28);
 
 		//Virtual Villagers - New Believers.exe+357CD - D9 04 8E              - fld dword ptr [esi+ecx*4]
 
