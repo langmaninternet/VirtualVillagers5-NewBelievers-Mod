@@ -192,11 +192,13 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		//		GhiDuLieu0(pid, handle, 0x3578A, fastSkillData, 2);
 		//		
 		//		
-		//		//Virtual Villagers - New Believers.exe+5A9E3 - 29 86 647D0100        - sub [esi+00017D64],eax
-		//		unsigned char infManaData[1] = { 0x01 };
-		//		GhiDuLieu0(pid, handle, 0x5A9E3, infManaData, 1);
-		//		
-		//		
+
+
+
+		//Virtual Villagers - New Believers.exe+5AB53 - 29 86 647D0100        - sub [esi+00017D64],eax
+		unsigned char infManaData[1] = { 0x01 };
+		GhiDuLieu0(pid, handle, 0x5AB53, infManaData, 1);
+
 		//		unsigned char maxManaData[2] = { 0x90,0x90 };
 		//		GhiDuLieu0(pid, handle, 0x5AAD6, maxManaData, 2);
 
@@ -225,10 +227,7 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 			m_tech++;
 			WriteProcessMemory(handle, address, &m_tech, 4, 0);
 		}
-
-
-
-
+		UpdateData(FALSE);
 
 
 
@@ -390,24 +389,11 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 
 
 
-
-
-
-		UpdateData(FALSE);
-
-
-
-
+		/************************************************************************/
+		/* Collection - Trophies                                                */
+		/************************************************************************/
 		if (0)
 		{
-
-
-
-
-
-			/************************************************************************/
-			/* Collection                                                           */
-			/************************************************************************/
 			address = (int*)0x7E93D0;
 			int collectionArray[48] = { 0 };
 			ReadProcessMemory(handle, address, collectionArray, 48 * 4, 0);
@@ -469,6 +455,10 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 				sprintf_s(bufferText, "Collection - Auto");
 			}
 			GetDlgItem(IDC_COLLECTION)->SetWindowTextA(bufferText);
+
+
+
+
 
 
 			/************************************************************************/
