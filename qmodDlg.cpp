@@ -245,32 +245,6 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		if (0)
 		{
 
-			/************************************************************************/
-			/* Food and Tech                                                        */
-			/************************************************************************/
-			address = (int*)0x7A7730;
-			ReadProcessMemory(handle, address, &m_food, 4, 0);
-			if (m_food < 99989)
-			{
-				m_food += 10;
-				WriteProcessMemory(handle, address, &m_food, 4, 0);
-			}
-
-			address = (int*)0x7A79E0;
-			ReadProcessMemory(handle, address, &m_tech, 4, 0);
-			if (m_tech < 988899 && m_tech > 100)
-			{
-				m_tech += 1000;
-				WriteProcessMemory(handle, address, &m_tech, 4, 0);
-			}
-			else if (m_tech < 90)
-			{
-				if (m_tech < 1) m_tech = 1;
-				m_tech++;
-				WriteProcessMemory(handle, address, &m_tech, 4, 0);
-			}
-
-			UpdateData(FALSE);
 
 
 
