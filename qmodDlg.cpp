@@ -194,14 +194,12 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		//		
 
 
-
+		/************************************************************************/
+		/* Mana                                                                 */
+		/************************************************************************/
 		//Virtual Villagers - New Believers.exe+5AB53 - 29 86 647D0100        - sub [esi+00017D64],eax
 		unsigned char infManaData[1] = { 0x01 };
 		GhiDuLieu0(pid, handle, 0x5AB53, infManaData, 1);
-
-		//		unsigned char maxManaData[2] = { 0x90,0x90 };
-		//		GhiDuLieu0(pid, handle, 0x5AAD6, maxManaData, 2);
-
 
 		/************************************************************************/
 		/* Food and Tech                                                        */
