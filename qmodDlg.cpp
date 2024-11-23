@@ -188,8 +188,6 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		GhiDuLieu0(pid, handle, 0x2D0D0, noniCheat, 1);
 
 
-		unsigned char fastSkillData[2] = { 0x90,0x90 };
-		GhiDuLieu0(pid, handle, 0x3578A, fastSkillData, 2);
 
 
 
@@ -221,7 +219,9 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		//Virtual Villagers - New Believers.exe+357DC - D9 14 8E              - fst dword ptr [esi+ecx*4]
 
 
-		//
+		unsigned char fastSkillData[2] = { 0x90,0x90 };
+		GhiDuLieu0(pid, handle, 0x3578A, fastSkillData, 2);
+
 
 
 		/************************************************************************/
