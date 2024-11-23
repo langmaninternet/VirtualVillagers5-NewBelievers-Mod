@@ -182,16 +182,15 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		/************************************************************************/
 
 
-		//		// Virtual Villagers - New Believers.exe+2D0D0 - 29 B3 587D0100        - sub [ebx+00017D58],esi
-		//		// --> Virtual Villagers - New Believers.exe+2D0D0 - 01 B3 587D0100        - add [ebx+00017D58],esi
-		//		unsigned char noniCheat[1] = { 0x01 };
-		//		GhiDuLieu0(pid, handle, 0x2D0D0, noniCheat, 1);
-		//		
-		//		
-		//		unsigned char fastSkillData[2] = { 0x90,0x90 };
-		//		GhiDuLieu0(pid, handle, 0x3578A, fastSkillData, 2);
-		//		
-		//		
+		// Virtual Villagers - New Believers.exe+2D0D0 - 29 B3 587D0100        - sub [ebx+00017D58],esi
+		// --> Virtual Villagers - New Believers.exe+2D0D0 - 01 B3 587D0100        - add [ebx+00017D58],esi
+		unsigned char noniCheat[1] = { 0x01 };
+		GhiDuLieu0(pid, handle, 0x2D0D0, noniCheat, 1);
+
+
+		unsigned char fastSkillData[2] = { 0x90,0x90 };
+		GhiDuLieu0(pid, handle, 0x3578A, fastSkillData, 2);
+
 
 
 		/************************************************************************/
@@ -201,16 +200,16 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		// Virtual Villagers - New Believers.exe+357BD - D8 14 8E              - fcom dword ptr [esi+ecx*4]
 		// Virtual Villagers - New Believers.exe+357C0 - DFE0                  - fnstsw ax
 		// Virtual Villagers - New Believers.exe+357C2 - F6 C4 41              - test ah,41
-		unsigned char always_get_skill_point[31] = { 0xD9, 0x04, 0x8E,
-			0xD8, 0x44, 0x24, 0x0C,			
-			0xD8, 0x44, 0x24, 0x0C,
-			0xD8, 0x44, 0x24, 0x0C,
-			0xD8, 0x44, 0x24, 0x0C,
-			0xD8, 0x44, 0x24, 0x0C,
-			0xD8, 0x44, 0x24, 0x0C,
-			0xD8, 0x44, 0x24, 0x0C,
-		};
-		GhiDuLieu0(pid, handle, 0x357BD, always_get_skill_point, 31);
+		//	unsigned char always_get_skill_point[31] = { 0xD9, 0x04, 0x8E,
+		//		0xD8, 0x44, 0x24, 0x0C,			
+		//		0xD8, 0x44, 0x24, 0x0C,
+		//		0xD8, 0x44, 0x24, 0x0C,
+		//		0xD8, 0x44, 0x24, 0x0C,
+		//		0xD8, 0x44, 0x24, 0x0C,
+		//		0xD8, 0x44, 0x24, 0x0C,
+		//		0xD8, 0x44, 0x24, 0x0C,
+		//	};
+		//GhiDuLieu0(pid, handle, 0x357BD, always_get_skill_point, 31);
 
 		//Virtual Villagers - New Believers.exe+357CD - D9 04 8E              - fld dword ptr [esi+ecx*4]
 
@@ -228,9 +227,18 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		/************************************************************************/
 		/* Mana                                                                 */
 		/************************************************************************/
-		//Virtual Villagers - New Believers.exe+5AB53 - 29 86 647D0100        - sub [esi+00017D64],eax
+		//	Virtual Villagers - New Believers.exe+5AB53 - 29 86 647D0100        - sub [esi+00017D64],eax
+		//	unsigned char infManaData[1] = { 0x01 };
+		//	GhiDuLieu0(pid, handle, 0x5AB53, infManaData, 1);
+
+		//Virtual Villagers - New Believers.exe+5A9E3 - 29 86 647D0100        - sub [esi+00017D64],eax
 		unsigned char infManaData[1] = { 0x01 };
-		GhiDuLieu0(pid, handle, 0x5AB53, infManaData, 1);
+		GhiDuLieu0(pid, handle, 0x5A9E3, infManaData, 1);
+
+
+		unsigned char maxManaData[2] = { 0x90,0x90 };
+		GhiDuLieu0(pid, handle, 0x5AAD6, maxManaData, 2);
+
 
 		/************************************************************************/
 		/* Food and Tech                                                        */
