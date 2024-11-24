@@ -429,324 +429,321 @@ void CQmodDlg::OnTimer(UINT_PTR nIdEvent)
 		/************************************************************************/
 		/* Collection - Trophies                                                */
 		/************************************************************************/
-		if (0)
+		address = (int*)0x7E93D0;
+		int collectionArray[48] = { 0 };
+		ReadProcessMemory(handle, address, collectionArray, 48 * 4, 0);
+		int countScientificItems = 0;
+		int countRelicItems = 0;
+		for (int i = 0; i < 24; i++)
 		{
-			address = (int*)0x7E93D0;
-			int collectionArray[48] = { 0 };
-			ReadProcessMemory(handle, address, collectionArray, 48 * 4, 0);
-			int countScientificItems = 0;
-			int countRelicItems = 0;
-			for (int i = 0; i < 24; i++)
+			if (collectionArray[i])
 			{
-				if (collectionArray[i])
-				{
-					countScientificItems++;
-				}
+				countScientificItems++;
 			}
-			for (int i = 24; i < 48; i++)
+		}
+		for (int i = 24; i < 48; i++)
+		{
+			if (collectionArray[i])
 			{
-				if (collectionArray[i])
-				{
-					countRelicItems++;
-				}
+				countRelicItems++;
 			}
-			if (countScientificItems < 23)
+		}
+		if (countScientificItems < 23)
+		{
+			char collectionData = 1;
+			for (int i = 0; i < 23; i++)
 			{
-				char collectionData = 1;
-				for (int i = 0; i < 23; i++)
+				WriteProcessMemory(handle, address + i, &collectionData, 1, 0);
+
+				if (collectionArray[i] == 0 && rand() % 5 == 1)
 				{
 					WriteProcessMemory(handle, address + i, &collectionData, 1, 0);
-
-					if (collectionArray[i] == 0 && rand() % 5 == 1)
-					{
-						WriteProcessMemory(handle, address + i, &collectionData, 1, 0);
-						//soft break;
-						i = 99;
-					}
+					//soft break;
+					i = 99;
 				}
 			}
-			else if (countRelicItems < 23)
-			{
-				char collectionData = 1;
-				for (int i = 24; i < 48; i++)
-				{
-					if (collectionArray[i] == 0 && rand() % 5 == 1)
-					{
-						WriteProcessMemory(handle, address + i, &collectionData, 1, 0);
-						//soft break;
-						i = 99;
-					}
-				}
-			}
-
-			if (countScientificItems + countRelicItems < 48)
-			{
-				sprintf_s(bufferText, "Collection - %d+%d/48", countScientificItems, countRelicItems);
-			}
-			else if (countScientificItems + countRelicItems == 48)
-			{
-				sprintf_s(bufferText, "Collection - Full");
-			}
-			else
-			{
-				sprintf_s(bufferText, "Collection - Auto");
-			}
-			GetDlgItem(IDC_COLLECTION)->SetWindowTextA(bufferText);
-
-
-
-
-
-
-			/************************************************************************/
-			/* Trophies                                                             */
-			/************************************************************************/
-			int trophies = 0;
-			//food   1000
-			address = (int*)0x7EE57C;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 999)
-			{
-				trophies = 999;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-			//food   10000
-			address = (int*)0x7EE588;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 9999)
-			{
-				trophies = 9999;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-			//food  100000
-			address = (int*)0x7EE594;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 99999)
-			{
-				trophies = 99999;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-			//food  1000000
-			address = (int*)0x7EE5A0;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 999999)
-			{
-				trophies = 999999;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-			//tech  1000
-			address = (int*)0x7EE5AC;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 999)
-			{
-				trophies = 999;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-			//tech   10000
-			address = (int*)0x7EE5B8;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 9999)
-			{
-				trophies = 9999;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-			//tech  100000
-			address = (int*)0x7EE5C4;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 99999)
-			{
-				trophies = 99999;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-			//tech   1000000
-			address = (int*)0x7EE5D0;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 999999)
-			{
-				trophies = 999999;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-			//mushroom 25;
-			address = (int*)0x7EE5DC;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 24)
-			{
-				trophies = 24;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-			//mushroom 100;
-			address = (int*)0x7EE5E8;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 99)
-			{
-				trophies = 99;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-			//mushroom 500;
-			address = (int*)0x7EE5F4;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 499)
-			{
-				trophies = 499;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-			//rare mushroom  5;
-			address = (int*)0x7EE600;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 4)
-			{
-				trophies = 4;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-			//rare mushroom  25;
-			address = (int*)0x7EE60C;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 24)
-			{
-				trophies = 24;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-			//rare mushroom  100;
-			address = (int*)0x7EE618;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 99)
-			{
-				trophies = 99;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-			//Relics
-			address = (int*)0x7EE624;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies != countRelicItems)
-			{
-				trophies = countRelicItems;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-			//Science items
-			address = (int*)0x7EE630;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies != countScientificItems)
-			{
-				trophies = countScientificItems;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-
-
-			//Heathens 3
-			address = (int*)0x7EE660;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 2)
-			{
-				trophies = 2;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-			//Heathens 10
-			address = (int*)0x7EE66C;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 9)
-			{
-				trophies = 9;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-
-
-
-
-
-			//baby girl
-			address = (int*)0x7EE6CC;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 9)
-			{
-				trophies = 9;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-			//baby boy
-			address = (int*)0x7EE6D8;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 9)
-			{
-				trophies = 9;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-
-
-
-
-
-
-			//event 10;
-			address = (int*)0x7EE7B0;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 9)
-			{
-				trophies = 9;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-			//event 50;
-			address = (int*)0x7EE7BC;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 49)
-			{
-				trophies = 49;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-
-
-			//cured = 10;
-			address = (int*)0x7EE7EC;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 9)
-			{
-				trophies = 9;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-			//cured = 50;
-			address = (int*)0x7EE7F8;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 49)
-			{
-				trophies = 49;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-			//cured = 100;
-			address = (int*)0x7EE804;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 99)
-			{
-				trophies = 99;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-			//dot lua 50
-			address = (int*)0x7EE810;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 49)
-			{
-				trophies = 49;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-			//dot lua time
-			address = (int*)0x7EE81C;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 99)
-			{
-				trophies = 99;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-			//100 bo quan ao
-			address = (int*)0x7EE834;
-			ReadProcessMemory(handle, address, &trophies, 4, 0);
-			if (trophies < 99)
-			{
-				trophies = 99;
-				WriteProcessMemory(handle, address, &trophies, 4, 0);
-			}
-
-
-
-
-
 		}
+		else if (countRelicItems < 23)
+		{
+			char collectionData = 1;
+			for (int i = 24; i < 48; i++)
+			{
+				if (collectionArray[i] == 0 && rand() % 5 == 1)
+				{
+					WriteProcessMemory(handle, address + i, &collectionData, 1, 0);
+					//soft break;
+					i = 99;
+				}
+			}
+		}
+
+		if (countScientificItems + countRelicItems < 48)
+		{
+			sprintf_s(bufferText, "Collection - %d+%d/48", countScientificItems, countRelicItems);
+		}
+		else if (countScientificItems + countRelicItems == 48)
+		{
+			sprintf_s(bufferText, "Collection - Full");
+		}
+		else
+		{
+			sprintf_s(bufferText, "Collection - Auto");
+		}
+		GetDlgItem(IDC_COLLECTION)->SetWindowTextA(bufferText);
+
+
+
+
+
+
+		/************************************************************************/
+		/* Trophies                                                             */
+		/************************************************************************/
+		int trophies = 0;
+		//food   1000
+		address = (int*)0x7EE57C;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 999)
+		{
+			trophies = 999;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+		//food   10000
+		address = (int*)0x7EE588;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 9999)
+		{
+			trophies = 9999;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+		//food  100000
+		address = (int*)0x7EE594;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 99999)
+		{
+			trophies = 99999;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+		//food  1000000
+		address = (int*)0x7EE5A0;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 999999)
+		{
+			trophies = 999999;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+		//tech  1000
+		address = (int*)0x7EE5AC;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 999)
+		{
+			trophies = 999;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+		//tech   10000
+		address = (int*)0x7EE5B8;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 9999)
+		{
+			trophies = 9999;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+		//tech  100000
+		address = (int*)0x7EE5C4;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 99999)
+		{
+			trophies = 99999;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+		//tech   1000000
+		address = (int*)0x7EE5D0;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 999999)
+		{
+			trophies = 999999;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+		//mushroom 25;
+		address = (int*)0x7EE5DC;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 24)
+		{
+			trophies = 24;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+		//mushroom 100;
+		address = (int*)0x7EE5E8;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 99)
+		{
+			trophies = 99;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+		//mushroom 500;
+		address = (int*)0x7EE5F4;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 499)
+		{
+			trophies = 499;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+		//rare mushroom  5;
+		address = (int*)0x7EE600;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 4)
+		{
+			trophies = 4;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+		//rare mushroom  25;
+		address = (int*)0x7EE60C;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 24)
+		{
+			trophies = 24;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+		//rare mushroom  100;
+		address = (int*)0x7EE618;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 99)
+		{
+			trophies = 99;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+		//Relics
+		address = (int*)0x7EE624;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies != countRelicItems)
+		{
+			trophies = countRelicItems;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+		//Science items
+		address = (int*)0x7EE630;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies != countScientificItems)
+		{
+			trophies = countScientificItems;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+
+
+		//Heathens 3
+		address = (int*)0x7EE660;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 2)
+		{
+			trophies = 2;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+		//Heathens 10
+		address = (int*)0x7EE66C;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 9)
+		{
+			trophies = 9;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+
+
+
+
+
+		//baby girl
+		address = (int*)0x7EE6CC;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 9)
+		{
+			trophies = 9;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+		//baby boy
+		address = (int*)0x7EE6D8;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 9)
+		{
+			trophies = 9;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+
+
+
+
+
+
+		//event 10;
+		address = (int*)0x7EE7B0;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 9)
+		{
+			trophies = 9;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+		//event 50;
+		address = (int*)0x7EE7BC;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 49)
+		{
+			trophies = 49;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+
+
+		//cured = 10;
+		address = (int*)0x7EE7EC;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 9)
+		{
+			trophies = 9;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+		//cured = 50;
+		address = (int*)0x7EE7F8;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 49)
+		{
+			trophies = 49;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+		//cured = 100;
+		address = (int*)0x7EE804;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 99)
+		{
+			trophies = 99;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+		//dot lua 50
+		address = (int*)0x7EE810;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 49)
+		{
+			trophies = 49;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+		//dot lua time
+		address = (int*)0x7EE81C;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 99)
+		{
+			trophies = 99;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+		//100 bo quan ao
+		address = (int*)0x7EE834;
+		ReadProcessMemory(handle, address, &trophies, 4, 0);
+		if (trophies < 99)
+		{
+			trophies = 99;
+			WriteProcessMemory(handle, address, &trophies, 4, 0);
+		}
+
+
+
+
+
 
 		CloseHandle(handle);
 	}
